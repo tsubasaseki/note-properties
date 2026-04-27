@@ -1,7 +1,4 @@
 import { createRequire } from 'module';
-import { slugTag, getFileExtension, slugifyFilePath, splitAnchor, joinSegments, simplifySlug as simplifySlug$1 } from '@quartz-community/utils';
-import { classNames } from '@quartz-community/utils/lang';
-import { jsxs, jsx, Fragment } from 'preact/jsx-runtime';
 
 const require$1 = createRequire(import.meta.url);
 var __create = Object.create;
@@ -10,11 +7,11 @@ var __getOwnPropDesc = Object.getOwnPropertyDescriptor;
 var __getOwnPropNames = Object.getOwnPropertyNames;
 var __getProtoOf = Object.getPrototypeOf;
 var __hasOwnProp = Object.prototype.hasOwnProperty;
-var __require = /* @__PURE__ */ ((x) => typeof require$1 !== "undefined" ? require$1 : typeof Proxy !== "undefined" ? new Proxy(x, {
-  get: (a, b) => (typeof require$1 !== "undefined" ? require$1 : a)[b]
-}) : x)(function(x) {
+var __require = /* @__PURE__ */ ((x2) => typeof require$1 !== "undefined" ? require$1 : typeof Proxy !== "undefined" ? new Proxy(x2, {
+  get: (a2, b2) => (typeof require$1 !== "undefined" ? require$1 : a2)[b2]
+}) : x2)(function(x2) {
   if (typeof require$1 !== "undefined") return require$1.apply(this, arguments);
-  throw Error('Dynamic require of "' + x + '" is not supported');
+  throw Error('Dynamic require of "' + x2 + '" is not supported');
 });
 var __commonJS = (cb, mod) => function __require2() {
   return mod || (0, cb[__getOwnPropNames(cb)[0]])((mod = { exports: {} }).exports, mod), mod.exports;
@@ -170,23 +167,23 @@ var require_is_extendable = __commonJS({
 var require_extend_shallow = __commonJS({
   "node_modules/extend-shallow/index.js"(exports2, module2) {
     var isObject2 = require_is_extendable();
-    module2.exports = function extend3(o) {
-      if (!isObject2(o)) {
-        o = {};
+    module2.exports = function extend3(o2) {
+      if (!isObject2(o2)) {
+        o2 = {};
       }
       var len = arguments.length;
-      for (var i = 1; i < len; i++) {
-        var obj = arguments[i];
+      for (var i2 = 1; i2 < len; i2++) {
+        var obj = arguments[i2];
         if (isObject2(obj)) {
-          assign(o, obj);
+          assign(o2, obj);
         }
       }
-      return o;
+      return o2;
     };
-    function assign(a, b) {
-      for (var key in b) {
-        if (hasOwn(b, key)) {
-          a[key] = b[key];
+    function assign(a2, b2) {
+      for (var key in b2) {
+        if (hasOwn(b2, key)) {
+          a2[key] = b2[key];
         }
       }
     }
@@ -230,12 +227,12 @@ var require_section_matter = __commonJS({
           stack = [];
         }
       }
-      for (var i = 0; i < lines.length; i++) {
-        var line = lines[i];
+      for (var i2 = 0; i2 < lines.length; i2++) {
+        var line = lines[i2];
         var len = stack.length;
         var ln = line.trim();
         if (isDelimiter(ln, delim)) {
-          if (ln.length === 3 && i !== 0) {
+          if (ln.length === 3 && i2 !== 0) {
             if (len === 0 || len === 2) {
               content.push(line);
               continue;
@@ -710,14 +707,14 @@ var require_int = __commonJS({
   "node_modules/gray-matter/node_modules/js-yaml/lib/js-yaml/type/int.js"(exports2, module2) {
     var common2 = require_common();
     var Type2 = require_type();
-    function isHexCode2(c) {
-      return 48 <= c && c <= 57 || 65 <= c && c <= 70 || 97 <= c && c <= 102;
+    function isHexCode2(c2) {
+      return 48 <= c2 && c2 <= 57 || 65 <= c2 && c2 <= 70 || 97 <= c2 && c2 <= 102;
     }
-    function isOctCode2(c) {
-      return 48 <= c && c <= 55;
+    function isOctCode2(c2) {
+      return 48 <= c2 && c2 <= 55;
     }
-    function isDecCode2(c) {
-      return 48 <= c && c <= 57;
+    function isDecCode2(c2) {
+      return 48 <= c2 && c2 <= 57;
     }
     function resolveYamlInteger2(data) {
       if (data === null) return false;
@@ -790,13 +787,13 @@ var require_int = __commonJS({
         return sign * parseInt(value2, 8);
       }
       if (value2.indexOf(":") !== -1) {
-        value2.split(":").forEach(function(v) {
-          digits.unshift(parseInt(v, 10));
+        value2.split(":").forEach(function(v2) {
+          digits.unshift(parseInt(v2, 10));
         });
         value2 = 0;
         base = 1;
-        digits.forEach(function(d) {
-          value2 += d * base;
+        digits.forEach(function(d2) {
+          value2 += d2 * base;
           base *= 60;
         });
         return sign * value2;
@@ -868,13 +865,13 @@ var require_float = __commonJS({
       } else if (value2 === ".nan") {
         return NaN;
       } else if (value2.indexOf(":") >= 0) {
-        value2.split(":").forEach(function(v) {
-          digits.unshift(parseFloat(v, 10));
+        value2.split(":").forEach(function(v2) {
+          digits.unshift(parseFloat(v2, 10));
         });
         value2 = 0;
         base = 1;
-        digits.forEach(function(d) {
-          value2 += d * base;
+        digits.forEach(function(d2) {
+          value2 += d2 * base;
           base *= 60;
         });
         return sign * value2;
@@ -1324,7 +1321,7 @@ var require_function = __commonJS({
     try {
       _require = __require;
       esprima = _require("esprima");
-    } catch (_) {
+    } catch (_2) {
       if (typeof window !== "undefined") esprima = window.esprima;
     }
     var _require;
@@ -1412,57 +1409,57 @@ var require_loader = __commonJS({
     function _class2(obj) {
       return Object.prototype.toString.call(obj);
     }
-    function is_EOL2(c) {
-      return c === 10 || c === 13;
+    function is_EOL2(c2) {
+      return c2 === 10 || c2 === 13;
     }
-    function is_WHITE_SPACE2(c) {
-      return c === 9 || c === 32;
+    function is_WHITE_SPACE2(c2) {
+      return c2 === 9 || c2 === 32;
     }
-    function is_WS_OR_EOL2(c) {
-      return c === 9 || c === 32 || c === 10 || c === 13;
+    function is_WS_OR_EOL2(c2) {
+      return c2 === 9 || c2 === 32 || c2 === 10 || c2 === 13;
     }
-    function is_FLOW_INDICATOR2(c) {
-      return c === 44 || c === 91 || c === 93 || c === 123 || c === 125;
+    function is_FLOW_INDICATOR2(c2) {
+      return c2 === 44 || c2 === 91 || c2 === 93 || c2 === 123 || c2 === 125;
     }
-    function fromHexCode2(c) {
+    function fromHexCode2(c2) {
       var lc;
-      if (48 <= c && c <= 57) {
-        return c - 48;
+      if (48 <= c2 && c2 <= 57) {
+        return c2 - 48;
       }
-      lc = c | 32;
+      lc = c2 | 32;
       if (97 <= lc && lc <= 102) {
         return lc - 97 + 10;
       }
       return -1;
     }
-    function escapedHexLen2(c) {
-      if (c === 120) {
+    function escapedHexLen2(c2) {
+      if (c2 === 120) {
         return 2;
       }
-      if (c === 117) {
+      if (c2 === 117) {
         return 4;
       }
-      if (c === 85) {
+      if (c2 === 85) {
         return 8;
       }
       return 0;
     }
-    function fromDecimalCode2(c) {
-      if (48 <= c && c <= 57) {
-        return c - 48;
+    function fromDecimalCode2(c2) {
+      if (48 <= c2 && c2 <= 57) {
+        return c2 - 48;
       }
       return -1;
     }
-    function simpleEscapeSequence2(c) {
-      return c === 48 ? "\0" : c === 97 ? "\x07" : c === 98 ? "\b" : c === 116 ? "	" : c === 9 ? "	" : c === 110 ? "\n" : c === 118 ? "\v" : c === 102 ? "\f" : c === 114 ? "\r" : c === 101 ? "\x1B" : c === 32 ? " " : c === 34 ? '"' : c === 47 ? "/" : c === 92 ? "\\" : c === 78 ? "\x85" : c === 95 ? "\xA0" : c === 76 ? "\u2028" : c === 80 ? "\u2029" : "";
+    function simpleEscapeSequence2(c2) {
+      return c2 === 48 ? "\0" : c2 === 97 ? "\x07" : c2 === 98 ? "\b" : c2 === 116 ? "	" : c2 === 9 ? "	" : c2 === 110 ? "\n" : c2 === 118 ? "\v" : c2 === 102 ? "\f" : c2 === 114 ? "\r" : c2 === 101 ? "\x1B" : c2 === 32 ? " " : c2 === 34 ? '"' : c2 === 47 ? "/" : c2 === 92 ? "\\" : c2 === 78 ? "\x85" : c2 === 95 ? "\xA0" : c2 === 76 ? "\u2028" : c2 === 80 ? "\u2029" : "";
     }
-    function charFromCodepoint2(c) {
-      if (c <= 65535) {
-        return String.fromCharCode(c);
+    function charFromCodepoint2(c2) {
+      if (c2 <= 65535) {
+        return String.fromCharCode(c2);
       }
       return String.fromCharCode(
-        (c - 65536 >> 10) + 55296,
-        (c - 65536 & 1023) + 56320
+        (c2 - 65536 >> 10) + 55296,
+        (c2 - 65536 & 1023) + 56320
       );
     }
     function setProperty2(object, key, value2) {
@@ -1479,11 +1476,11 @@ var require_loader = __commonJS({
     }
     var simpleEscapeCheck2 = new Array(256);
     var simpleEscapeMap2 = new Array(256);
-    for (i = 0; i < 256; i++) {
-      simpleEscapeCheck2[i] = simpleEscapeSequence2(i) ? 1 : 0;
-      simpleEscapeMap2[i] = simpleEscapeSequence2(i);
+    for (i2 = 0; i2 < 256; i2++) {
+      simpleEscapeCheck2[i2] = simpleEscapeSequence2(i2) ? 1 : 0;
+      simpleEscapeMap2[i2] = simpleEscapeSequence2(i2);
     }
-    var i;
+    var i2;
     function State2(input, options2) {
       this.input = input;
       this.filename = options2["filename"] || null;
@@ -2657,20 +2654,20 @@ var require_dumper = __commonJS({
       }
       return false;
     }
-    function isWhitespace2(c) {
-      return c === CHAR_SPACE2 || c === CHAR_TAB2;
+    function isWhitespace2(c2) {
+      return c2 === CHAR_SPACE2 || c2 === CHAR_TAB2;
     }
-    function isPrintable2(c) {
-      return 32 <= c && c <= 126 || 161 <= c && c <= 55295 && c !== 8232 && c !== 8233 || 57344 <= c && c <= 65533 && c !== 65279 || 65536 <= c && c <= 1114111;
+    function isPrintable2(c2) {
+      return 32 <= c2 && c2 <= 126 || 161 <= c2 && c2 <= 55295 && c2 !== 8232 && c2 !== 8233 || 57344 <= c2 && c2 <= 65533 && c2 !== 65279 || 65536 <= c2 && c2 <= 1114111;
     }
-    function isNsChar(c) {
-      return isPrintable2(c) && !isWhitespace2(c) && c !== 65279 && c !== CHAR_CARRIAGE_RETURN2 && c !== CHAR_LINE_FEED2;
+    function isNsChar(c2) {
+      return isPrintable2(c2) && !isWhitespace2(c2) && c2 !== 65279 && c2 !== CHAR_CARRIAGE_RETURN2 && c2 !== CHAR_LINE_FEED2;
     }
-    function isPlainSafe2(c, prev) {
-      return isPrintable2(c) && c !== 65279 && c !== CHAR_COMMA2 && c !== CHAR_LEFT_SQUARE_BRACKET2 && c !== CHAR_RIGHT_SQUARE_BRACKET2 && c !== CHAR_LEFT_CURLY_BRACKET2 && c !== CHAR_RIGHT_CURLY_BRACKET2 && c !== CHAR_COLON2 && (c !== CHAR_SHARP2 || prev && isNsChar(prev));
+    function isPlainSafe2(c2, prev) {
+      return isPrintable2(c2) && c2 !== 65279 && c2 !== CHAR_COMMA2 && c2 !== CHAR_LEFT_SQUARE_BRACKET2 && c2 !== CHAR_RIGHT_SQUARE_BRACKET2 && c2 !== CHAR_LEFT_CURLY_BRACKET2 && c2 !== CHAR_RIGHT_CURLY_BRACKET2 && c2 !== CHAR_COLON2 && (c2 !== CHAR_SHARP2 || prev && isNsChar(prev));
     }
-    function isPlainSafeFirst2(c) {
-      return isPrintable2(c) && c !== 65279 && !isWhitespace2(c) && c !== CHAR_MINUS2 && c !== CHAR_QUESTION2 && c !== CHAR_COLON2 && c !== CHAR_COMMA2 && c !== CHAR_LEFT_SQUARE_BRACKET2 && c !== CHAR_RIGHT_SQUARE_BRACKET2 && c !== CHAR_LEFT_CURLY_BRACKET2 && c !== CHAR_RIGHT_CURLY_BRACKET2 && c !== CHAR_SHARP2 && c !== CHAR_AMPERSAND2 && c !== CHAR_ASTERISK2 && c !== CHAR_EXCLAMATION2 && c !== CHAR_VERTICAL_LINE2 && c !== CHAR_EQUALS2 && c !== CHAR_GREATER_THAN2 && c !== CHAR_SINGLE_QUOTE2 && c !== CHAR_DOUBLE_QUOTE2 && c !== CHAR_PERCENT2 && c !== CHAR_COMMERCIAL_AT2 && c !== CHAR_GRAVE_ACCENT2;
+    function isPlainSafeFirst2(c2) {
+      return isPrintable2(c2) && c2 !== 65279 && !isWhitespace2(c2) && c2 !== CHAR_MINUS2 && c2 !== CHAR_QUESTION2 && c2 !== CHAR_COLON2 && c2 !== CHAR_COMMA2 && c2 !== CHAR_LEFT_SQUARE_BRACKET2 && c2 !== CHAR_RIGHT_SQUARE_BRACKET2 && c2 !== CHAR_LEFT_CURLY_BRACKET2 && c2 !== CHAR_RIGHT_CURLY_BRACKET2 && c2 !== CHAR_SHARP2 && c2 !== CHAR_AMPERSAND2 && c2 !== CHAR_ASTERISK2 && c2 !== CHAR_EXCLAMATION2 && c2 !== CHAR_VERTICAL_LINE2 && c2 !== CHAR_EQUALS2 && c2 !== CHAR_GREATER_THAN2 && c2 !== CHAR_SINGLE_QUOTE2 && c2 !== CHAR_DOUBLE_QUOTE2 && c2 !== CHAR_PERCENT2 && c2 !== CHAR_COMMERCIAL_AT2 && c2 !== CHAR_GRAVE_ACCENT2;
     }
     function needIndentIndicator2(string) {
       var leadingSpaceRe = /^\n* /;
@@ -2682,7 +2679,7 @@ var require_dumper = __commonJS({
     var STYLE_FOLDED2 = 4;
     var STYLE_DOUBLE2 = 5;
     function chooseScalarStyle2(string, singleLineOnly, indentPerLevel, lineWidth, testAmbiguousType) {
-      var i;
+      var i2;
       var char, prev_char;
       var hasLineBreak = false;
       var hasFoldableLine = false;
@@ -2690,31 +2687,31 @@ var require_dumper = __commonJS({
       var previousLineBreak = -1;
       var plain = isPlainSafeFirst2(string.charCodeAt(0)) && !isWhitespace2(string.charCodeAt(string.length - 1));
       if (singleLineOnly) {
-        for (i = 0; i < string.length; i++) {
-          char = string.charCodeAt(i);
+        for (i2 = 0; i2 < string.length; i2++) {
+          char = string.charCodeAt(i2);
           if (!isPrintable2(char)) {
             return STYLE_DOUBLE2;
           }
-          prev_char = i > 0 ? string.charCodeAt(i - 1) : null;
+          prev_char = i2 > 0 ? string.charCodeAt(i2 - 1) : null;
           plain = plain && isPlainSafe2(char, prev_char);
         }
       } else {
-        for (i = 0; i < string.length; i++) {
-          char = string.charCodeAt(i);
+        for (i2 = 0; i2 < string.length; i2++) {
+          char = string.charCodeAt(i2);
           if (char === CHAR_LINE_FEED2) {
             hasLineBreak = true;
             if (shouldTrackWidth) {
               hasFoldableLine = hasFoldableLine || // Foldable line = too long, and not more-indented.
-              i - previousLineBreak - 1 > lineWidth && string[previousLineBreak + 1] !== " ";
-              previousLineBreak = i;
+              i2 - previousLineBreak - 1 > lineWidth && string[previousLineBreak + 1] !== " ";
+              previousLineBreak = i2;
             }
           } else if (!isPrintable2(char)) {
             return STYLE_DOUBLE2;
           }
-          prev_char = i > 0 ? string.charCodeAt(i - 1) : null;
+          prev_char = i2 > 0 ? string.charCodeAt(i2 - 1) : null;
           plain = plain && isPlainSafe2(char, prev_char);
         }
-        hasFoldableLine = hasFoldableLine || shouldTrackWidth && (i - previousLineBreak - 1 > lineWidth && string[previousLineBreak + 1] !== " ");
+        hasFoldableLine = hasFoldableLine || shouldTrackWidth && (i2 - previousLineBreak - 1 > lineWidth && string[previousLineBreak + 1] !== " ");
       }
       if (!hasLineBreak && !hasFoldableLine) {
         return plain && !testAmbiguousType(string) ? STYLE_PLAIN2 : STYLE_SINGLE2;
@@ -2810,18 +2807,18 @@ var require_dumper = __commonJS({
       var result = "";
       var char, nextChar;
       var escapeSeq;
-      for (var i = 0; i < string.length; i++) {
-        char = string.charCodeAt(i);
+      for (var i2 = 0; i2 < string.length; i2++) {
+        char = string.charCodeAt(i2);
         if (char >= 55296 && char <= 56319) {
-          nextChar = string.charCodeAt(i + 1);
+          nextChar = string.charCodeAt(i2 + 1);
           if (nextChar >= 56320 && nextChar <= 57343) {
             result += encodeHex2((char - 55296) * 1024 + nextChar - 56320 + 65536);
-            i++;
+            i2++;
             continue;
           }
         }
         escapeSeq = ESCAPE_SEQUENCES2[char];
-        result += !escapeSeq && isPrintable2(char) ? string[i] : escapeSeq || encodeHex2(char);
+        result += !escapeSeq && isPrintable2(char) ? string[i2] : escapeSeq || encodeHex2(char);
       }
       return result;
     }
@@ -3500,32 +3497,32 @@ var require_format = __commonJS({
         return format.apply(null, [fmt].concat(replacements));
       }
       function format(fmt) {
-        var argIndex = 1, args = [].slice.call(arguments), i = 0, n = fmt.length, result = "", c, escaped = false, arg, tmp, leadingZero = false, precision, nextArg = function() {
+        var argIndex = 1, args = [].slice.call(arguments), i2 = 0, n2 = fmt.length, result = "", c2, escaped = false, arg, tmp, leadingZero = false, precision, nextArg = function() {
           return args[argIndex++];
         }, slurpNumber = function() {
           var digits = "";
-          while (/\d/.test(fmt[i])) {
-            digits += fmt[i++];
-            c = fmt[i];
+          while (/\d/.test(fmt[i2])) {
+            digits += fmt[i2++];
+            c2 = fmt[i2];
           }
           return digits.length > 0 ? parseInt(digits) : null;
         };
-        for (; i < n; ++i) {
-          c = fmt[i];
+        for (; i2 < n2; ++i2) {
+          c2 = fmt[i2];
           if (escaped) {
             escaped = false;
-            if (c == ".") {
+            if (c2 == ".") {
               leadingZero = false;
-              c = fmt[++i];
-            } else if (c == "0" && fmt[i + 1] == ".") {
+              c2 = fmt[++i2];
+            } else if (c2 == "0" && fmt[i2 + 1] == ".") {
               leadingZero = true;
-              i += 2;
-              c = fmt[i];
+              i2 += 2;
+              c2 = fmt[i2];
             } else {
               leadingZero = true;
             }
             precision = slurpNumber();
-            switch (c) {
+            switch (c2) {
               case "b":
                 result += parseInt(nextArg(), 10).toString(2);
                 break;
@@ -3559,13 +3556,13 @@ var require_format = __commonJS({
                 result += "0x" + parseInt(nextArg(), 10).toString(16).toUpperCase();
                 break;
               default:
-                result += c;
+                result += c2;
                 break;
             }
-          } else if (c === "%") {
+          } else if (c2 === "%") {
             escaped = true;
           } else {
-            result += c;
+            result += c2;
           }
         }
         return result;
@@ -3662,8 +3659,8 @@ var require_parser = __commonJS({
           return node("Date", /* @__PURE__ */ new Date(date + "T" + time), line, column);
         }, peg$c81 = /^[ \t]/, peg$c82 = { type: "class", value: "[ \\t]", description: "[ \\t]" }, peg$c83 = "\n", peg$c84 = { type: "literal", value: "\n", description: '"\\n"' }, peg$c85 = "\r", peg$c86 = { type: "literal", value: "\r", description: '"\\r"' }, peg$c87 = /^[0-9a-f]/i, peg$c88 = { type: "class", value: "[0-9a-f]i", description: "[0-9a-f]i" }, peg$c89 = /^[0-9]/, peg$c90 = { type: "class", value: "[0-9]", description: "[0-9]" }, peg$c91 = "_", peg$c92 = { type: "literal", value: "_", description: '"_"' }, peg$c93 = function() {
           return "";
-        }, peg$c94 = /^[A-Za-z0-9_\-]/, peg$c95 = { type: "class", value: "[A-Za-z0-9_\\-]", description: "[A-Za-z0-9_\\-]" }, peg$c96 = function(d) {
-          return d.join("");
+        }, peg$c94 = /^[A-Za-z0-9_\-]/, peg$c95 = { type: "class", value: "[A-Za-z0-9_\\-]", description: "[A-Za-z0-9_\\-]" }, peg$c96 = function(d2) {
+          return d2.join("");
         }, peg$c97 = '\\"', peg$c98 = { type: "literal", value: '\\"', description: '"\\\\\\""' }, peg$c99 = function() {
           return '"';
         }, peg$c100 = "\\\\", peg$c101 = { type: "literal", value: "\\\\", description: '"\\\\\\\\"' }, peg$c102 = function() {
@@ -3695,9 +3692,9 @@ var require_parser = __commonJS({
         }
         function peg$computePosDetails(pos) {
           function advance(details, startPos, endPos) {
-            var p, ch;
-            for (p = startPos; p < endPos; p++) {
-              ch = input.charAt(p);
+            var p2, ch;
+            for (p2 = startPos; p2 < endPos; p2++) {
+              ch = input.charAt(p2);
               if (ch === "\n") {
                 if (!details.seenCR) {
                   details.line++;
@@ -3736,30 +3733,30 @@ var require_parser = __commonJS({
         }
         function peg$buildException(message, expected2, pos) {
           function cleanupExpected(expected3) {
-            var i = 1;
-            expected3.sort(function(a, b) {
-              if (a.description < b.description) {
+            var i2 = 1;
+            expected3.sort(function(a2, b2) {
+              if (a2.description < b2.description) {
                 return -1;
-              } else if (a.description > b.description) {
+              } else if (a2.description > b2.description) {
                 return 1;
               } else {
                 return 0;
               }
             });
-            while (i < expected3.length) {
-              if (expected3[i - 1] === expected3[i]) {
-                expected3.splice(i, 1);
+            while (i2 < expected3.length) {
+              if (expected3[i2 - 1] === expected3[i2]) {
+                expected3.splice(i2, 1);
               } else {
-                i++;
+                i2++;
               }
             }
           }
           function buildMessage(expected3, found2) {
-            function stringEscape(s) {
+            function stringEscape(s2) {
               function hex(ch) {
                 return ch.charCodeAt(0).toString(16).toUpperCase();
               }
-              return s.replace(/\\/g, "\\\\").replace(/"/g, '\\"').replace(/\x08/g, "\\b").replace(/\t/g, "\\t").replace(/\n/g, "\\n").replace(/\f/g, "\\f").replace(/\r/g, "\\r").replace(/[\x00-\x07\x0B\x0E\x0F]/g, function(ch) {
+              return s2.replace(/\\/g, "\\\\").replace(/"/g, '\\"').replace(/\x08/g, "\\b").replace(/\t/g, "\\t").replace(/\n/g, "\\n").replace(/\f/g, "\\f").replace(/\r/g, "\\r").replace(/[\x00-\x07\x0B\x0E\x0F]/g, function(ch) {
                 return "\\x0" + hex(ch);
               }).replace(/[\x10-\x1F\x80-\xFF]/g, function(ch) {
                 return "\\x" + hex(ch);
@@ -3769,9 +3766,9 @@ var require_parser = __commonJS({
                 return "\\u" + hex(ch);
               });
             }
-            var expectedDescs = new Array(expected3.length), expectedDesc, foundDesc, i;
-            for (i = 0; i < expected3.length; i++) {
-              expectedDescs[i] = expected3[i].description;
+            var expectedDescs = new Array(expected3.length), expectedDesc, foundDesc, i2;
+            for (i2 = 0; i2 < expected3.length; i2++) {
+              expectedDescs[i2] = expected3[i2].description;
             }
             expectedDesc = expected3.length > 1 ? expectedDescs.slice(0, -1).join(", ") + " or " + expectedDescs[expected3.length - 1] : expectedDescs[0];
             foundDesc = found2 ? '"' + stringEscape(found2) + '"' : "end of input";
@@ -7133,8 +7130,8 @@ var require_compiler = __commonJS({
       return reduce(nodes);
       function reduce(nodes2) {
         var node;
-        for (var i = 0; i < nodes2.length; i++) {
-          node = nodes2[i];
+        for (var i2 = 0; i2 < nodes2.length; i2++) {
+          node = nodes2[i2];
           switch (node.type) {
             case "Assign":
               assign(node);
@@ -7189,8 +7186,8 @@ var require_compiler = __commonJS({
       }
       function reduceInlineTableNode(values) {
         var obj = /* @__PURE__ */ Object.create(null);
-        for (var i = 0; i < values.length; i++) {
-          var val = values[i];
+        for (var i2 = 0; i2 < values.length; i2++) {
+          var val = values[i2];
           if (val.value.type === "InlineTable") {
             obj[val.key] = reduceInlineTableNode(val.value.value);
           } else if (val.type === "InlineTableValue") {
@@ -7219,8 +7216,8 @@ var require_compiler = __commonJS({
         if (!pathAssigned(quotedPath)) {
           assignedPaths.push(quotedPath);
         }
-        assignedPaths = assignedPaths.filter(function(p) {
-          return p.indexOf(quotedPath) !== 0;
+        assignedPaths = assignedPaths.filter(function(p2) {
+          return p2.indexOf(quotedPath) !== 0;
         });
         assignedPaths.push(quotedPath);
         context = deepRef(data, path, [], line, column);
@@ -7238,21 +7235,21 @@ var require_compiler = __commonJS({
         var traversedPath = "";
         keys.join(".");
         var ctx = start;
-        for (var i = 0; i < keys.length; i++) {
-          var key = keys[i];
+        for (var i2 = 0; i2 < keys.length; i2++) {
+          var key = keys[i2];
           traversed.push(key);
           traversedPath = traversed.join(".");
           if (typeof ctx[key] === "undefined") {
-            if (i === keys.length - 1) {
+            if (i2 === keys.length - 1) {
               ctx[key] = value2;
             } else {
               ctx[key] = /* @__PURE__ */ Object.create(null);
             }
-          } else if (i !== keys.length - 1 && valueAssignments.indexOf(traversedPath) > -1) {
+          } else if (i2 !== keys.length - 1 && valueAssignments.indexOf(traversedPath) > -1) {
             genError("Cannot redefine existing key '" + traversedPath + "'.", line, column);
           }
           ctx = ctx[key];
-          if (ctx instanceof Array && ctx.length && i < keys.length - 1) {
+          if (ctx instanceof Array && ctx.length && i2 < keys.length - 1) {
             ctx = ctx[ctx.length - 1];
           }
         }
@@ -7260,8 +7257,8 @@ var require_compiler = __commonJS({
       }
       function reduceArrayWithTypeChecking(array) {
         var firstType = null;
-        for (var i = 0; i < array.length; i++) {
-          var node = array[i];
+        for (var i2 = 0; i2 < array.length; i2++) {
+          var node = array[i2];
           if (firstType === null) {
             firstType = node.type;
           } else {
@@ -7760,33 +7757,33 @@ function makeSnippet(mark, options2) {
     }
   }
   if (foundLineNo < 0) foundLineNo = lineStarts.length - 1;
-  var result = "", i, line;
+  var result = "", i2, line;
   var lineNoLength = Math.min(mark.line + options2.linesAfter, lineEnds.length).toString().length;
   var maxLineLength = options2.maxLength - (options2.indent + lineNoLength + 3);
-  for (i = 1; i <= options2.linesBefore; i++) {
-    if (foundLineNo - i < 0) break;
+  for (i2 = 1; i2 <= options2.linesBefore; i2++) {
+    if (foundLineNo - i2 < 0) break;
     line = getLine(
       mark.buffer,
-      lineStarts[foundLineNo - i],
-      lineEnds[foundLineNo - i],
-      mark.position - (lineStarts[foundLineNo] - lineStarts[foundLineNo - i]),
+      lineStarts[foundLineNo - i2],
+      lineEnds[foundLineNo - i2],
+      mark.position - (lineStarts[foundLineNo] - lineStarts[foundLineNo - i2]),
       maxLineLength
     );
-    result = common.repeat(" ", options2.indent) + padStart((mark.line - i + 1).toString(), lineNoLength) + " | " + line.str + "\n" + result;
+    result = common.repeat(" ", options2.indent) + padStart((mark.line - i2 + 1).toString(), lineNoLength) + " | " + line.str + "\n" + result;
   }
   line = getLine(mark.buffer, lineStarts[foundLineNo], lineEnds[foundLineNo], mark.position, maxLineLength);
   result += common.repeat(" ", options2.indent) + padStart((mark.line + 1).toString(), lineNoLength) + " | " + line.str + "\n";
   result += common.repeat("-", options2.indent + lineNoLength + 3 + line.pos) + "^\n";
-  for (i = 1; i <= options2.linesAfter; i++) {
-    if (foundLineNo + i >= lineEnds.length) break;
+  for (i2 = 1; i2 <= options2.linesAfter; i2++) {
+    if (foundLineNo + i2 >= lineEnds.length) break;
     line = getLine(
       mark.buffer,
-      lineStarts[foundLineNo + i],
-      lineEnds[foundLineNo + i],
-      mark.position - (lineStarts[foundLineNo] - lineStarts[foundLineNo + i]),
+      lineStarts[foundLineNo + i2],
+      lineEnds[foundLineNo + i2],
+      mark.position - (lineStarts[foundLineNo] - lineStarts[foundLineNo + i2]),
       maxLineLength
     );
-    result += common.repeat(" ", options2.indent) + padStart((mark.line + i + 1).toString(), lineNoLength) + " | " + line.str + "\n";
+    result += common.repeat(" ", options2.indent) + padStart((mark.line + i2 + 1).toString(), lineNoLength) + " | " + line.str + "\n";
   }
   return result.replace(/\n$/, "");
 }
@@ -8016,14 +8013,14 @@ var bool = new type("tag:yaml.org,2002:bool", {
   },
   defaultStyle: "lowercase"
 });
-function isHexCode(c) {
-  return 48 <= c && c <= 57 || 65 <= c && c <= 70 || 97 <= c && c <= 102;
+function isHexCode(c2) {
+  return 48 <= c2 && c2 <= 57 || 65 <= c2 && c2 <= 70 || 97 <= c2 && c2 <= 102;
 }
-function isOctCode(c) {
-  return 48 <= c && c <= 55;
+function isOctCode(c2) {
+  return 48 <= c2 && c2 <= 55;
 }
-function isDecCode(c) {
-  return 48 <= c && c <= 57;
+function isDecCode(c2) {
+  return 48 <= c2 && c2 <= 57;
 }
 function resolveYamlInteger(data) {
   if (data === null) return false;
@@ -8453,57 +8450,57 @@ var PATTERN_TAG_URI = /^(?:!|[^,\[\]\{\}])(?:%[0-9a-f]{2}|[0-9a-z\-#;\/\?:@&=\+\
 function _class(obj) {
   return Object.prototype.toString.call(obj);
 }
-function is_EOL(c) {
-  return c === 10 || c === 13;
+function is_EOL(c2) {
+  return c2 === 10 || c2 === 13;
 }
-function is_WHITE_SPACE(c) {
-  return c === 9 || c === 32;
+function is_WHITE_SPACE(c2) {
+  return c2 === 9 || c2 === 32;
 }
-function is_WS_OR_EOL(c) {
-  return c === 9 || c === 32 || c === 10 || c === 13;
+function is_WS_OR_EOL(c2) {
+  return c2 === 9 || c2 === 32 || c2 === 10 || c2 === 13;
 }
-function is_FLOW_INDICATOR(c) {
-  return c === 44 || c === 91 || c === 93 || c === 123 || c === 125;
+function is_FLOW_INDICATOR(c2) {
+  return c2 === 44 || c2 === 91 || c2 === 93 || c2 === 123 || c2 === 125;
 }
-function fromHexCode(c) {
+function fromHexCode(c2) {
   var lc;
-  if (48 <= c && c <= 57) {
-    return c - 48;
+  if (48 <= c2 && c2 <= 57) {
+    return c2 - 48;
   }
-  lc = c | 32;
+  lc = c2 | 32;
   if (97 <= lc && lc <= 102) {
     return lc - 97 + 10;
   }
   return -1;
 }
-function escapedHexLen(c) {
-  if (c === 120) {
+function escapedHexLen(c2) {
+  if (c2 === 120) {
     return 2;
   }
-  if (c === 117) {
+  if (c2 === 117) {
     return 4;
   }
-  if (c === 85) {
+  if (c2 === 85) {
     return 8;
   }
   return 0;
 }
-function fromDecimalCode(c) {
-  if (48 <= c && c <= 57) {
-    return c - 48;
+function fromDecimalCode(c2) {
+  if (48 <= c2 && c2 <= 57) {
+    return c2 - 48;
   }
   return -1;
 }
-function simpleEscapeSequence(c) {
-  return c === 48 ? "\0" : c === 97 ? "\x07" : c === 98 ? "\b" : c === 116 ? "	" : c === 9 ? "	" : c === 110 ? "\n" : c === 118 ? "\v" : c === 102 ? "\f" : c === 114 ? "\r" : c === 101 ? "\x1B" : c === 32 ? " " : c === 34 ? '"' : c === 47 ? "/" : c === 92 ? "\\" : c === 78 ? "\x85" : c === 95 ? "\xA0" : c === 76 ? "\u2028" : c === 80 ? "\u2029" : "";
+function simpleEscapeSequence(c2) {
+  return c2 === 48 ? "\0" : c2 === 97 ? "\x07" : c2 === 98 ? "\b" : c2 === 116 ? "	" : c2 === 9 ? "	" : c2 === 110 ? "\n" : c2 === 118 ? "\v" : c2 === 102 ? "\f" : c2 === 114 ? "\r" : c2 === 101 ? "\x1B" : c2 === 32 ? " " : c2 === 34 ? '"' : c2 === 47 ? "/" : c2 === 92 ? "\\" : c2 === 78 ? "\x85" : c2 === 95 ? "\xA0" : c2 === 76 ? "\u2028" : c2 === 80 ? "\u2029" : "";
 }
-function charFromCodepoint(c) {
-  if (c <= 65535) {
-    return String.fromCharCode(c);
+function charFromCodepoint(c2) {
+  if (c2 <= 65535) {
+    return String.fromCharCode(c2);
   }
   return String.fromCharCode(
-    (c - 65536 >> 10) + 55296,
-    (c - 65536 & 1023) + 56320
+    (c2 - 65536 >> 10) + 55296,
+    (c2 - 65536 & 1023) + 56320
   );
 }
 function setProperty(object, key, value2) {
@@ -8520,11 +8517,11 @@ function setProperty(object, key, value2) {
 }
 var simpleEscapeCheck = new Array(256);
 var simpleEscapeMap = new Array(256);
-for (i = 0; i < 256; i++) {
-  simpleEscapeCheck[i] = simpleEscapeSequence(i) ? 1 : 0;
-  simpleEscapeMap[i] = simpleEscapeSequence(i);
+for (i2 = 0; i2 < 256; i2++) {
+  simpleEscapeCheck[i2] = simpleEscapeSequence(i2) ? 1 : 0;
+  simpleEscapeMap[i2] = simpleEscapeSequence(i2);
 }
-var i;
+var i2;
 function State$1(input, options2) {
   this.input = input;
   this.filename = options2["filename"] || null;
@@ -9745,31 +9742,31 @@ function testImplicitResolving(state, str3) {
   }
   return false;
 }
-function isWhitespace(c) {
-  return c === CHAR_SPACE || c === CHAR_TAB;
+function isWhitespace(c2) {
+  return c2 === CHAR_SPACE || c2 === CHAR_TAB;
 }
-function isPrintable(c) {
-  return 32 <= c && c <= 126 || 161 <= c && c <= 55295 && c !== 8232 && c !== 8233 || 57344 <= c && c <= 65533 && c !== CHAR_BOM || 65536 <= c && c <= 1114111;
+function isPrintable(c2) {
+  return 32 <= c2 && c2 <= 126 || 161 <= c2 && c2 <= 55295 && c2 !== 8232 && c2 !== 8233 || 57344 <= c2 && c2 <= 65533 && c2 !== CHAR_BOM || 65536 <= c2 && c2 <= 1114111;
 }
-function isNsCharOrWhitespace(c) {
-  return isPrintable(c) && c !== CHAR_BOM && c !== CHAR_CARRIAGE_RETURN && c !== CHAR_LINE_FEED;
+function isNsCharOrWhitespace(c2) {
+  return isPrintable(c2) && c2 !== CHAR_BOM && c2 !== CHAR_CARRIAGE_RETURN && c2 !== CHAR_LINE_FEED;
 }
-function isPlainSafe(c, prev, inblock) {
-  var cIsNsCharOrWhitespace = isNsCharOrWhitespace(c);
-  var cIsNsChar = cIsNsCharOrWhitespace && !isWhitespace(c);
+function isPlainSafe(c2, prev, inblock) {
+  var cIsNsCharOrWhitespace = isNsCharOrWhitespace(c2);
+  var cIsNsChar = cIsNsCharOrWhitespace && !isWhitespace(c2);
   return (
     // ns-plain-safe
     (inblock ? (
       // c = flow-in
       cIsNsCharOrWhitespace
-    ) : cIsNsCharOrWhitespace && c !== CHAR_COMMA && c !== CHAR_LEFT_SQUARE_BRACKET && c !== CHAR_RIGHT_SQUARE_BRACKET && c !== CHAR_LEFT_CURLY_BRACKET && c !== CHAR_RIGHT_CURLY_BRACKET) && c !== CHAR_SHARP && !(prev === CHAR_COLON && !cIsNsChar) || isNsCharOrWhitespace(prev) && !isWhitespace(prev) && c === CHAR_SHARP || prev === CHAR_COLON && cIsNsChar
+    ) : cIsNsCharOrWhitespace && c2 !== CHAR_COMMA && c2 !== CHAR_LEFT_SQUARE_BRACKET && c2 !== CHAR_RIGHT_SQUARE_BRACKET && c2 !== CHAR_LEFT_CURLY_BRACKET && c2 !== CHAR_RIGHT_CURLY_BRACKET) && c2 !== CHAR_SHARP && !(prev === CHAR_COLON && !cIsNsChar) || isNsCharOrWhitespace(prev) && !isWhitespace(prev) && c2 === CHAR_SHARP || prev === CHAR_COLON && cIsNsChar
   );
 }
-function isPlainSafeFirst(c) {
-  return isPrintable(c) && c !== CHAR_BOM && !isWhitespace(c) && c !== CHAR_MINUS && c !== CHAR_QUESTION && c !== CHAR_COLON && c !== CHAR_COMMA && c !== CHAR_LEFT_SQUARE_BRACKET && c !== CHAR_RIGHT_SQUARE_BRACKET && c !== CHAR_LEFT_CURLY_BRACKET && c !== CHAR_RIGHT_CURLY_BRACKET && c !== CHAR_SHARP && c !== CHAR_AMPERSAND && c !== CHAR_ASTERISK && c !== CHAR_EXCLAMATION && c !== CHAR_VERTICAL_LINE && c !== CHAR_EQUALS && c !== CHAR_GREATER_THAN && c !== CHAR_SINGLE_QUOTE && c !== CHAR_DOUBLE_QUOTE && c !== CHAR_PERCENT && c !== CHAR_COMMERCIAL_AT && c !== CHAR_GRAVE_ACCENT;
+function isPlainSafeFirst(c2) {
+  return isPrintable(c2) && c2 !== CHAR_BOM && !isWhitespace(c2) && c2 !== CHAR_MINUS && c2 !== CHAR_QUESTION && c2 !== CHAR_COLON && c2 !== CHAR_COMMA && c2 !== CHAR_LEFT_SQUARE_BRACKET && c2 !== CHAR_RIGHT_SQUARE_BRACKET && c2 !== CHAR_LEFT_CURLY_BRACKET && c2 !== CHAR_RIGHT_CURLY_BRACKET && c2 !== CHAR_SHARP && c2 !== CHAR_AMPERSAND && c2 !== CHAR_ASTERISK && c2 !== CHAR_EXCLAMATION && c2 !== CHAR_VERTICAL_LINE && c2 !== CHAR_EQUALS && c2 !== CHAR_GREATER_THAN && c2 !== CHAR_SINGLE_QUOTE && c2 !== CHAR_DOUBLE_QUOTE && c2 !== CHAR_PERCENT && c2 !== CHAR_COMMERCIAL_AT && c2 !== CHAR_GRAVE_ACCENT;
 }
-function isPlainSafeLast(c) {
-  return !isWhitespace(c) && c !== CHAR_COLON;
+function isPlainSafeLast(c2) {
+  return !isWhitespace(c2) && c2 !== CHAR_COLON;
 }
 function codePointAt(string, pos) {
   var first = string.charCodeAt(pos), second;
@@ -9791,7 +9788,7 @@ var STYLE_LITERAL = 3;
 var STYLE_FOLDED = 4;
 var STYLE_DOUBLE = 5;
 function chooseScalarStyle(string, singleLineOnly, indentPerLevel, lineWidth, testAmbiguousType, quotingType, forceQuotes, inblock) {
-  var i;
+  var i2;
   var char = 0;
   var prevChar = null;
   var hasLineBreak = false;
@@ -9800,8 +9797,8 @@ function chooseScalarStyle(string, singleLineOnly, indentPerLevel, lineWidth, te
   var previousLineBreak = -1;
   var plain = isPlainSafeFirst(codePointAt(string, 0)) && isPlainSafeLast(codePointAt(string, string.length - 1));
   if (singleLineOnly || forceQuotes) {
-    for (i = 0; i < string.length; char >= 65536 ? i += 2 : i++) {
-      char = codePointAt(string, i);
+    for (i2 = 0; i2 < string.length; char >= 65536 ? i2 += 2 : i2++) {
+      char = codePointAt(string, i2);
       if (!isPrintable(char)) {
         return STYLE_DOUBLE;
       }
@@ -9809,14 +9806,14 @@ function chooseScalarStyle(string, singleLineOnly, indentPerLevel, lineWidth, te
       prevChar = char;
     }
   } else {
-    for (i = 0; i < string.length; char >= 65536 ? i += 2 : i++) {
-      char = codePointAt(string, i);
+    for (i2 = 0; i2 < string.length; char >= 65536 ? i2 += 2 : i2++) {
+      char = codePointAt(string, i2);
       if (char === CHAR_LINE_FEED) {
         hasLineBreak = true;
         if (shouldTrackWidth) {
           hasFoldableLine = hasFoldableLine || // Foldable line = too long, and not more-indented.
-          i - previousLineBreak - 1 > lineWidth && string[previousLineBreak + 1] !== " ";
-          previousLineBreak = i;
+          i2 - previousLineBreak - 1 > lineWidth && string[previousLineBreak + 1] !== " ";
+          previousLineBreak = i2;
         }
       } else if (!isPrintable(char)) {
         return STYLE_DOUBLE;
@@ -9824,7 +9821,7 @@ function chooseScalarStyle(string, singleLineOnly, indentPerLevel, lineWidth, te
       plain = plain && isPlainSafe(char, prevChar, inblock);
       prevChar = char;
     }
-    hasFoldableLine = hasFoldableLine || shouldTrackWidth && (i - previousLineBreak - 1 > lineWidth && string[previousLineBreak + 1] !== " ");
+    hasFoldableLine = hasFoldableLine || shouldTrackWidth && (i2 - previousLineBreak - 1 > lineWidth && string[previousLineBreak + 1] !== " ");
   }
   if (!hasLineBreak && !hasFoldableLine) {
     if (plain && !forceQuotes && !testAmbiguousType(string)) {
@@ -9937,12 +9934,12 @@ function escapeString(string) {
   var result = "";
   var char = 0;
   var escapeSeq;
-  for (var i = 0; i < string.length; char >= 65536 ? i += 2 : i++) {
-    char = codePointAt(string, i);
+  for (var i2 = 0; i2 < string.length; char >= 65536 ? i2 += 2 : i2++) {
+    char = codePointAt(string, i2);
     escapeSeq = ESCAPE_SEQUENCES[char];
     if (!escapeSeq && isPrintable(char)) {
-      result += string[i];
-      if (char >= 65536) result += string[i + 1];
+      result += string[i2];
+      if (char >= 65536) result += string[i2 + 1];
     } else {
       result += escapeSeq || encodeHex(char);
     }
@@ -10268,11 +10265,121 @@ var jsYaml = {
 
 // src/transformer.ts
 var import_toml = __toESM(require_toml());
+
+// node_modules/github-slugger/regex.js
+var regex = /[\0-\x1F!-,\.\/:-@\[-\^`\{-\xA9\xAB-\xB4\xB6-\xB9\xBB-\xBF\xD7\xF7\u02C2-\u02C5\u02D2-\u02DF\u02E5-\u02EB\u02ED\u02EF-\u02FF\u0375\u0378\u0379\u037E\u0380-\u0385\u0387\u038B\u038D\u03A2\u03F6\u0482\u0530\u0557\u0558\u055A-\u055F\u0589-\u0590\u05BE\u05C0\u05C3\u05C6\u05C8-\u05CF\u05EB-\u05EE\u05F3-\u060F\u061B-\u061F\u066A-\u066D\u06D4\u06DD\u06DE\u06E9\u06FD\u06FE\u0700-\u070F\u074B\u074C\u07B2-\u07BF\u07F6-\u07F9\u07FB\u07FC\u07FE\u07FF\u082E-\u083F\u085C-\u085F\u086B-\u089F\u08B5\u08C8-\u08D2\u08E2\u0964\u0965\u0970\u0984\u098D\u098E\u0991\u0992\u09A9\u09B1\u09B3-\u09B5\u09BA\u09BB\u09C5\u09C6\u09C9\u09CA\u09CF-\u09D6\u09D8-\u09DB\u09DE\u09E4\u09E5\u09F2-\u09FB\u09FD\u09FF\u0A00\u0A04\u0A0B-\u0A0E\u0A11\u0A12\u0A29\u0A31\u0A34\u0A37\u0A3A\u0A3B\u0A3D\u0A43-\u0A46\u0A49\u0A4A\u0A4E-\u0A50\u0A52-\u0A58\u0A5D\u0A5F-\u0A65\u0A76-\u0A80\u0A84\u0A8E\u0A92\u0AA9\u0AB1\u0AB4\u0ABA\u0ABB\u0AC6\u0ACA\u0ACE\u0ACF\u0AD1-\u0ADF\u0AE4\u0AE5\u0AF0-\u0AF8\u0B00\u0B04\u0B0D\u0B0E\u0B11\u0B12\u0B29\u0B31\u0B34\u0B3A\u0B3B\u0B45\u0B46\u0B49\u0B4A\u0B4E-\u0B54\u0B58-\u0B5B\u0B5E\u0B64\u0B65\u0B70\u0B72-\u0B81\u0B84\u0B8B-\u0B8D\u0B91\u0B96-\u0B98\u0B9B\u0B9D\u0BA0-\u0BA2\u0BA5-\u0BA7\u0BAB-\u0BAD\u0BBA-\u0BBD\u0BC3-\u0BC5\u0BC9\u0BCE\u0BCF\u0BD1-\u0BD6\u0BD8-\u0BE5\u0BF0-\u0BFF\u0C0D\u0C11\u0C29\u0C3A-\u0C3C\u0C45\u0C49\u0C4E-\u0C54\u0C57\u0C5B-\u0C5F\u0C64\u0C65\u0C70-\u0C7F\u0C84\u0C8D\u0C91\u0CA9\u0CB4\u0CBA\u0CBB\u0CC5\u0CC9\u0CCE-\u0CD4\u0CD7-\u0CDD\u0CDF\u0CE4\u0CE5\u0CF0\u0CF3-\u0CFF\u0D0D\u0D11\u0D45\u0D49\u0D4F-\u0D53\u0D58-\u0D5E\u0D64\u0D65\u0D70-\u0D79\u0D80\u0D84\u0D97-\u0D99\u0DB2\u0DBC\u0DBE\u0DBF\u0DC7-\u0DC9\u0DCB-\u0DCE\u0DD5\u0DD7\u0DE0-\u0DE5\u0DF0\u0DF1\u0DF4-\u0E00\u0E3B-\u0E3F\u0E4F\u0E5A-\u0E80\u0E83\u0E85\u0E8B\u0EA4\u0EA6\u0EBE\u0EBF\u0EC5\u0EC7\u0ECE\u0ECF\u0EDA\u0EDB\u0EE0-\u0EFF\u0F01-\u0F17\u0F1A-\u0F1F\u0F2A-\u0F34\u0F36\u0F38\u0F3A-\u0F3D\u0F48\u0F6D-\u0F70\u0F85\u0F98\u0FBD-\u0FC5\u0FC7-\u0FFF\u104A-\u104F\u109E\u109F\u10C6\u10C8-\u10CC\u10CE\u10CF\u10FB\u1249\u124E\u124F\u1257\u1259\u125E\u125F\u1289\u128E\u128F\u12B1\u12B6\u12B7\u12BF\u12C1\u12C6\u12C7\u12D7\u1311\u1316\u1317\u135B\u135C\u1360-\u137F\u1390-\u139F\u13F6\u13F7\u13FE-\u1400\u166D\u166E\u1680\u169B-\u169F\u16EB-\u16ED\u16F9-\u16FF\u170D\u1715-\u171F\u1735-\u173F\u1754-\u175F\u176D\u1771\u1774-\u177F\u17D4-\u17D6\u17D8-\u17DB\u17DE\u17DF\u17EA-\u180A\u180E\u180F\u181A-\u181F\u1879-\u187F\u18AB-\u18AF\u18F6-\u18FF\u191F\u192C-\u192F\u193C-\u1945\u196E\u196F\u1975-\u197F\u19AC-\u19AF\u19CA-\u19CF\u19DA-\u19FF\u1A1C-\u1A1F\u1A5F\u1A7D\u1A7E\u1A8A-\u1A8F\u1A9A-\u1AA6\u1AA8-\u1AAF\u1AC1-\u1AFF\u1B4C-\u1B4F\u1B5A-\u1B6A\u1B74-\u1B7F\u1BF4-\u1BFF\u1C38-\u1C3F\u1C4A-\u1C4C\u1C7E\u1C7F\u1C89-\u1C8F\u1CBB\u1CBC\u1CC0-\u1CCF\u1CD3\u1CFB-\u1CFF\u1DFA\u1F16\u1F17\u1F1E\u1F1F\u1F46\u1F47\u1F4E\u1F4F\u1F58\u1F5A\u1F5C\u1F5E\u1F7E\u1F7F\u1FB5\u1FBD\u1FBF-\u1FC1\u1FC5\u1FCD-\u1FCF\u1FD4\u1FD5\u1FDC-\u1FDF\u1FED-\u1FF1\u1FF5\u1FFD-\u203E\u2041-\u2053\u2055-\u2070\u2072-\u207E\u2080-\u208F\u209D-\u20CF\u20F1-\u2101\u2103-\u2106\u2108\u2109\u2114\u2116-\u2118\u211E-\u2123\u2125\u2127\u2129\u212E\u213A\u213B\u2140-\u2144\u214A-\u214D\u214F-\u215F\u2189-\u24B5\u24EA-\u2BFF\u2C2F\u2C5F\u2CE5-\u2CEA\u2CF4-\u2CFF\u2D26\u2D28-\u2D2C\u2D2E\u2D2F\u2D68-\u2D6E\u2D70-\u2D7E\u2D97-\u2D9F\u2DA7\u2DAF\u2DB7\u2DBF\u2DC7\u2DCF\u2DD7\u2DDF\u2E00-\u2E2E\u2E30-\u3004\u3008-\u3020\u3030\u3036\u3037\u303D-\u3040\u3097\u3098\u309B\u309C\u30A0\u30FB\u3100-\u3104\u3130\u318F-\u319F\u31C0-\u31EF\u3200-\u33FF\u4DC0-\u4DFF\u9FFD-\u9FFF\uA48D-\uA4CF\uA4FE\uA4FF\uA60D-\uA60F\uA62C-\uA63F\uA673\uA67E\uA6F2-\uA716\uA720\uA721\uA789\uA78A\uA7C0\uA7C1\uA7CB-\uA7F4\uA828-\uA82B\uA82D-\uA83F\uA874-\uA87F\uA8C6-\uA8CF\uA8DA-\uA8DF\uA8F8-\uA8FA\uA8FC\uA92E\uA92F\uA954-\uA95F\uA97D-\uA97F\uA9C1-\uA9CE\uA9DA-\uA9DF\uA9FF\uAA37-\uAA3F\uAA4E\uAA4F\uAA5A-\uAA5F\uAA77-\uAA79\uAAC3-\uAADA\uAADE\uAADF\uAAF0\uAAF1\uAAF7-\uAB00\uAB07\uAB08\uAB0F\uAB10\uAB17-\uAB1F\uAB27\uAB2F\uAB5B\uAB6A-\uAB6F\uABEB\uABEE\uABEF\uABFA-\uABFF\uD7A4-\uD7AF\uD7C7-\uD7CA\uD7FC-\uD7FF\uE000-\uF8FF\uFA6E\uFA6F\uFADA-\uFAFF\uFB07-\uFB12\uFB18-\uFB1C\uFB29\uFB37\uFB3D\uFB3F\uFB42\uFB45\uFBB2-\uFBD2\uFD3E-\uFD4F\uFD90\uFD91\uFDC8-\uFDEF\uFDFC-\uFDFF\uFE10-\uFE1F\uFE30-\uFE32\uFE35-\uFE4C\uFE50-\uFE6F\uFE75\uFEFD-\uFF0F\uFF1A-\uFF20\uFF3B-\uFF3E\uFF40\uFF5B-\uFF65\uFFBF-\uFFC1\uFFC8\uFFC9\uFFD0\uFFD1\uFFD8\uFFD9\uFFDD-\uFFFF]|\uD800[\uDC0C\uDC27\uDC3B\uDC3E\uDC4E\uDC4F\uDC5E-\uDC7F\uDCFB-\uDD3F\uDD75-\uDDFC\uDDFE-\uDE7F\uDE9D-\uDE9F\uDED1-\uDEDF\uDEE1-\uDEFF\uDF20-\uDF2C\uDF4B-\uDF4F\uDF7B-\uDF7F\uDF9E\uDF9F\uDFC4-\uDFC7\uDFD0\uDFD6-\uDFFF]|\uD801[\uDC9E\uDC9F\uDCAA-\uDCAF\uDCD4-\uDCD7\uDCFC-\uDCFF\uDD28-\uDD2F\uDD64-\uDDFF\uDF37-\uDF3F\uDF56-\uDF5F\uDF68-\uDFFF]|\uD802[\uDC06\uDC07\uDC09\uDC36\uDC39-\uDC3B\uDC3D\uDC3E\uDC56-\uDC5F\uDC77-\uDC7F\uDC9F-\uDCDF\uDCF3\uDCF6-\uDCFF\uDD16-\uDD1F\uDD3A-\uDD7F\uDDB8-\uDDBD\uDDC0-\uDDFF\uDE04\uDE07-\uDE0B\uDE14\uDE18\uDE36\uDE37\uDE3B-\uDE3E\uDE40-\uDE5F\uDE7D-\uDE7F\uDE9D-\uDEBF\uDEC8\uDEE7-\uDEFF\uDF36-\uDF3F\uDF56-\uDF5F\uDF73-\uDF7F\uDF92-\uDFFF]|\uD803[\uDC49-\uDC7F\uDCB3-\uDCBF\uDCF3-\uDCFF\uDD28-\uDD2F\uDD3A-\uDE7F\uDEAA\uDEAD-\uDEAF\uDEB2-\uDEFF\uDF1D-\uDF26\uDF28-\uDF2F\uDF51-\uDFAF\uDFC5-\uDFDF\uDFF7-\uDFFF]|\uD804[\uDC47-\uDC65\uDC70-\uDC7E\uDCBB-\uDCCF\uDCE9-\uDCEF\uDCFA-\uDCFF\uDD35\uDD40-\uDD43\uDD48-\uDD4F\uDD74\uDD75\uDD77-\uDD7F\uDDC5-\uDDC8\uDDCD\uDDDB\uDDDD-\uDDFF\uDE12\uDE38-\uDE3D\uDE3F-\uDE7F\uDE87\uDE89\uDE8E\uDE9E\uDEA9-\uDEAF\uDEEB-\uDEEF\uDEFA-\uDEFF\uDF04\uDF0D\uDF0E\uDF11\uDF12\uDF29\uDF31\uDF34\uDF3A\uDF45\uDF46\uDF49\uDF4A\uDF4E\uDF4F\uDF51-\uDF56\uDF58-\uDF5C\uDF64\uDF65\uDF6D-\uDF6F\uDF75-\uDFFF]|\uD805[\uDC4B-\uDC4F\uDC5A-\uDC5D\uDC62-\uDC7F\uDCC6\uDCC8-\uDCCF\uDCDA-\uDD7F\uDDB6\uDDB7\uDDC1-\uDDD7\uDDDE-\uDDFF\uDE41-\uDE43\uDE45-\uDE4F\uDE5A-\uDE7F\uDEB9-\uDEBF\uDECA-\uDEFF\uDF1B\uDF1C\uDF2C-\uDF2F\uDF3A-\uDFFF]|\uD806[\uDC3B-\uDC9F\uDCEA-\uDCFE\uDD07\uDD08\uDD0A\uDD0B\uDD14\uDD17\uDD36\uDD39\uDD3A\uDD44-\uDD4F\uDD5A-\uDD9F\uDDA8\uDDA9\uDDD8\uDDD9\uDDE2\uDDE5-\uDDFF\uDE3F-\uDE46\uDE48-\uDE4F\uDE9A-\uDE9C\uDE9E-\uDEBF\uDEF9-\uDFFF]|\uD807[\uDC09\uDC37\uDC41-\uDC4F\uDC5A-\uDC71\uDC90\uDC91\uDCA8\uDCB7-\uDCFF\uDD07\uDD0A\uDD37-\uDD39\uDD3B\uDD3E\uDD48-\uDD4F\uDD5A-\uDD5F\uDD66\uDD69\uDD8F\uDD92\uDD99-\uDD9F\uDDAA-\uDEDF\uDEF7-\uDFAF\uDFB1-\uDFFF]|\uD808[\uDF9A-\uDFFF]|\uD809[\uDC6F-\uDC7F\uDD44-\uDFFF]|[\uD80A\uD80B\uD80E-\uD810\uD812-\uD819\uD824-\uD82B\uD82D\uD82E\uD830-\uD833\uD837\uD839\uD83D\uD83F\uD87B-\uD87D\uD87F\uD885-\uDB3F\uDB41-\uDBFF][\uDC00-\uDFFF]|\uD80D[\uDC2F-\uDFFF]|\uD811[\uDE47-\uDFFF]|\uD81A[\uDE39-\uDE3F\uDE5F\uDE6A-\uDECF\uDEEE\uDEEF\uDEF5-\uDEFF\uDF37-\uDF3F\uDF44-\uDF4F\uDF5A-\uDF62\uDF78-\uDF7C\uDF90-\uDFFF]|\uD81B[\uDC00-\uDE3F\uDE80-\uDEFF\uDF4B-\uDF4E\uDF88-\uDF8E\uDFA0-\uDFDF\uDFE2\uDFE5-\uDFEF\uDFF2-\uDFFF]|\uD821[\uDFF8-\uDFFF]|\uD823[\uDCD6-\uDCFF\uDD09-\uDFFF]|\uD82C[\uDD1F-\uDD4F\uDD53-\uDD63\uDD68-\uDD6F\uDEFC-\uDFFF]|\uD82F[\uDC6B-\uDC6F\uDC7D-\uDC7F\uDC89-\uDC8F\uDC9A-\uDC9C\uDC9F-\uDFFF]|\uD834[\uDC00-\uDD64\uDD6A-\uDD6C\uDD73-\uDD7A\uDD83\uDD84\uDD8C-\uDDA9\uDDAE-\uDE41\uDE45-\uDFFF]|\uD835[\uDC55\uDC9D\uDCA0\uDCA1\uDCA3\uDCA4\uDCA7\uDCA8\uDCAD\uDCBA\uDCBC\uDCC4\uDD06\uDD0B\uDD0C\uDD15\uDD1D\uDD3A\uDD3F\uDD45\uDD47-\uDD49\uDD51\uDEA6\uDEA7\uDEC1\uDEDB\uDEFB\uDF15\uDF35\uDF4F\uDF6F\uDF89\uDFA9\uDFC3\uDFCC\uDFCD]|\uD836[\uDC00-\uDDFF\uDE37-\uDE3A\uDE6D-\uDE74\uDE76-\uDE83\uDE85-\uDE9A\uDEA0\uDEB0-\uDFFF]|\uD838[\uDC07\uDC19\uDC1A\uDC22\uDC25\uDC2B-\uDCFF\uDD2D-\uDD2F\uDD3E\uDD3F\uDD4A-\uDD4D\uDD4F-\uDEBF\uDEFA-\uDFFF]|\uD83A[\uDCC5-\uDCCF\uDCD7-\uDCFF\uDD4C-\uDD4F\uDD5A-\uDFFF]|\uD83B[\uDC00-\uDDFF\uDE04\uDE20\uDE23\uDE25\uDE26\uDE28\uDE33\uDE38\uDE3A\uDE3C-\uDE41\uDE43-\uDE46\uDE48\uDE4A\uDE4C\uDE50\uDE53\uDE55\uDE56\uDE58\uDE5A\uDE5C\uDE5E\uDE60\uDE63\uDE65\uDE66\uDE6B\uDE73\uDE78\uDE7D\uDE7F\uDE8A\uDE9C-\uDEA0\uDEA4\uDEAA\uDEBC-\uDFFF]|\uD83C[\uDC00-\uDD2F\uDD4A-\uDD4F\uDD6A-\uDD6F\uDD8A-\uDFFF]|\uD83E[\uDC00-\uDFEF\uDFFA-\uDFFF]|\uD869[\uDEDE-\uDEFF]|\uD86D[\uDF35-\uDF3F]|\uD86E[\uDC1E\uDC1F]|\uD873[\uDEA2-\uDEAF]|\uD87A[\uDFE1-\uDFFF]|\uD87E[\uDE1E-\uDFFF]|\uD884[\uDF4B-\uDFFF]|\uDB40[\uDC00-\uDCFF\uDDF0-\uDFFF]/g;
+function slug(value2, maintainCase) {
+  if (typeof value2 !== "string") return "";
+  value2 = value2.toLowerCase();
+  return value2.replace(regex, "").replace(/ /g, "-");
+}
+var l;
+function S(n2) {
+  return n2.children;
+}
+l = { __e: function(n2, l2, u3, t2) {
+  for (var i2, r2, o2; l2 = l2.__; ) if ((i2 = l2.__c) && !i2.__) try {
+    if ((r2 = i2.constructor) && null != r2.getDerivedStateFromError && (i2.setState(r2.getDerivedStateFromError(n2)), o2 = i2.__d), null != i2.componentDidCatch && (i2.componentDidCatch(n2, t2 || {}), o2 = i2.__d), o2) return i2.__E = i2;
+  } catch (l3) {
+    n2 = l3;
+  }
+  throw n2;
+} }, "function" == typeof Promise ? Promise.prototype.then.bind(Promise.resolve()) : setTimeout, Math.random().toString(8);
+
+// node_modules/preact/jsx-runtime/dist/jsxRuntime.mjs
+var f2 = 0;
+function u2(e2, t2, n2, o2, i2, u3) {
+  t2 || (t2 = {});
+  var a2, c2, p2 = t2;
+  if ("ref" in p2) for (c2 in p2 = {}, t2) "ref" == c2 ? a2 = t2[c2] : p2[c2] = t2[c2];
+  var l2 = { type: e2, props: p2, key: n2, ref: a2, __k: null, __: null, __b: 0, __e: null, __c: null, constructor: void 0, __v: --f2, __i: -1, __u: 0, __source: i2, __self: u3 };
+  if ("function" == typeof e2 && (a2 = e2.defaultProps)) for (c2 in a2) void 0 === p2[c2] && (p2[c2] = a2[c2]);
+  return l.vnode && l.vnode(l2), l2;
+}
+
+// node_modules/@quartz-community/utils/dist/index.js
 function simplifySlug(fp) {
-  return simplifySlug$1(fp);
+  const res = stripSlashes(trimSuffix(fp, "index"), true);
+  return res.length === 0 ? "/" : res;
+}
+function slugifyFilePath(fp, excludeExt) {
+  fp = stripSlashes(fp);
+  const ext = getFileExtension(fp);
+  const withoutFileExt = fp.replace(new RegExp(ext + "$"), "");
+  const finalExt = [".md", ".html", void 0].includes(ext) ? "" : ext;
+  let slug2 = _sluggify(withoutFileExt);
+  if (endsWith(slug2, "_index")) {
+    slug2 = slug2.replace(/_index$/, "index");
+  }
+  const segments = slug2.split("/");
+  if (segments.length >= 2 && segments[segments.length - 1] === segments[segments.length - 2]) {
+    segments[segments.length - 1] = "index";
+    slug2 = segments.join("/");
+  }
+  return slug2 + (finalExt ?? "");
+}
+function joinSegments(...args) {
+  if (args.length === 0) {
+    return "";
+  }
+  let joined = args.filter((segment) => segment !== "" && segment !== "/").map((segment) => stripSlashes(segment)).join("/");
+  const first = args[0];
+  const last = args[args.length - 1];
+  if (first?.startsWith("/")) {
+    joined = "/" + joined;
+  }
+  if (last?.endsWith("/")) {
+    joined = joined + "/";
+  }
+  return joined;
+}
+function endsWith(s2, suffix) {
+  return s2 === suffix || s2.endsWith("/" + suffix);
+}
+function trimSuffix(s2, suffix) {
+  if (endsWith(s2, suffix)) {
+    s2 = s2.slice(0, -suffix.length);
+  }
+  return s2;
+}
+function stripSlashes(s2, onlyStripPrefix) {
+  if (s2.startsWith("/")) {
+    s2 = s2.substring(1);
+  }
+  if (!onlyStripPrefix && s2.endsWith("/")) {
+    s2 = s2.slice(0, -1);
+  }
+  return s2;
+}
+function getFileExtension(s2) {
+  return s2.match(/\.[A-Za-z0-9]+$/)?.[0];
+}
+function splitAnchor(link) {
+  const [fp, anchor] = link.split("#", 2);
+  if (fp.endsWith(".pdf")) {
+    return [fp, anchor === void 0 ? "" : `#${anchor}`];
+  }
+  const slugged = anchor === void 0 ? "" : "#" + slug(anchor);
+  return [fp, slugged];
+}
+function slugTag(tag) {
+  return tag.split("/").map((tagSegment) => _sluggify(tagSegment)).join("/");
+}
+function slugifyPath(s2) {
+  return s2.split("/").map(
+    (segment) => segment.replace(/\s/g, "-").replace(/&/g, "-and-").replace(/%/g, "-percent").replace(/\?/g, "").replace(/#/g, "").toLowerCase()
+  ).join("/").replace(/\/$/, "");
+}
+function _sluggify(s2) {
+  return slugifyPath(s2);
+}
+
+// src/util/path.ts
+function simplifySlug2(fp) {
+  return simplifySlug(fp);
 }
 function resolveRelative(current, target) {
-  const simplified = simplifySlug(target);
+  const simplified = simplifySlug2(target);
   const rootPath = pathToRoot(current);
   return joinSegments(rootPath, simplified);
 }
@@ -10280,11 +10387,11 @@ function slugifyWikilinkTarget(target) {
   const [rawPath, anchor] = splitAnchor(target);
   if (!rawPath) return anchor;
   const pathWithExt = rawPath.endsWith(".md") ? rawPath : `${rawPath}.md`;
-  const slug = slugifyFilePath(pathWithExt);
-  return slug + anchor;
+  const slug2 = slugifyFilePath(pathWithExt);
+  return slug2 + anchor;
 }
-function pathToRoot(slug) {
-  let rootPath = slug.split("/").filter((x) => x !== "").slice(0, -1).map((_) => "..").join("/");
+function pathToRoot(slug2) {
+  let rootPath = slug2.split("/").filter((x2) => x2 !== "").slice(0, -1).map((_2) => "..").join("/");
   if (rootPath.length === 0) {
     rootPath = ".";
   }
@@ -10308,9 +10415,9 @@ function coalesceAliases(data, aliases) {
 function coerceToArray(input) {
   if (input === void 0 || input === null) return void 0;
   if (!Array.isArray(input)) {
-    return String(input).split(",").map((s) => s.trim());
+    return String(input).split(",").map((s2) => s2.trim());
   }
-  return input.filter((v) => typeof v === "string" || typeof v === "number").map((v) => v.toString());
+  return input.filter((v2) => typeof v2 === "string" || typeof v2 === "number").map((v2) => v2.toString());
 }
 function getAliasSlugs(aliases) {
   return aliases.map((alias) => {
@@ -10339,7 +10446,7 @@ function extractLinksFromValue(value2) {
     return value2.flatMap((item) => extractLinksFromValue(item));
   }
   if (value2 !== null && typeof value2 === "object") {
-    return Object.values(value2).flatMap((v) => extractLinksFromValue(v));
+    return Object.values(value2).flatMap((v2) => extractLinksFromValue(v2));
   }
   return [];
 }
@@ -10390,14 +10497,14 @@ var NoteProperties = (userOpts) => {
       return [
         [remarkFrontmatter, ["yaml", "toml"]],
         () => {
-          return (_, file) => {
+          return (_2, file) => {
             const fileData = Buffer.from(file.value);
             const { data } = (0, import_gray_matter.default)(fileData, {
               delimiters: opts.delimiters,
               language: opts.language,
               engines: {
-                yaml: (s) => jsYaml.load(s, { schema: jsYaml.JSON_SCHEMA }),
-                toml: (s) => import_toml.default.parse(s)
+                yaml: (s2) => jsYaml.load(s2, { schema: jsYaml.JSON_SCHEMA }),
+                toml: (s2) => import_toml.default.parse(s2)
               }
             });
             if (data.title != null && data.title.toString() !== "") {
@@ -10464,6 +10571,11 @@ var NoteProperties = (userOpts) => {
   };
 };
 
+// node_modules/@quartz-community/utils/dist/lang.js
+function classNames(...classes) {
+  return classes.filter(Boolean).join(" ");
+}
+
 // src/i18n/locales/en-US.ts
 var en_US_default = {
   components: {
@@ -10486,6 +10598,8 @@ var noteProperties_default = '.note-properties {\n  margin: 0.5rem 0 1rem;\n  bo
 
 // src/components/scripts/noteProperties.inline.ts
 var noteProperties_inline_default = 'var o="note-properties-collapsed";function d(){let e=document.querySelector("details.note-properties");if(!e)return;let t=localStorage.getItem(o);if(t!==null){let i=t==="true";e.open=!i}let n=()=>{localStorage.setItem(o,String(!e.open))};e.addEventListener("toggle",n),typeof window<"u"&&window.addCleanup&&window.addCleanup(()=>{e.removeEventListener("toggle",n)})}document.addEventListener("nav",()=>{d()});document.addEventListener("render",()=>{d()});\n';
+
+// src/components/NoteProperties.tsx
 var WIKILINK_RE = /\[\[([^\]|]+)(?:\|([^\]]+))?\]\]/g;
 var MDLINK_RE = /\[([^\]]*)\]\(([^)]+)\)/g;
 var URL_RE = /https?:\/\/[^\s<>]+/g;
@@ -10498,12 +10612,12 @@ function renderTextWithLinks(text, ctx) {
     segments.push({
       start: match.index,
       end: match.index + match[0].length,
-      node: /* @__PURE__ */ jsx("a", { href, class: "internal note-properties-link", children: display })
+      node: /* @__PURE__ */ u2("a", { href, class: "internal note-properties-link", children: display })
     });
   }
   for (const match of text.matchAll(MDLINK_RE)) {
     const overlaps = segments.some(
-      (s) => match.index < s.end && match.index + match[0].length > s.start
+      (s2) => match.index < s2.end && match.index + match[0].length > s2.start
     );
     if (overlaps) continue;
     const display = match[1];
@@ -10513,7 +10627,7 @@ function renderTextWithLinks(text, ctx) {
     segments.push({
       start: match.index,
       end: match.index + match[0].length,
-      node: /* @__PURE__ */ jsx(
+      node: /* @__PURE__ */ u2(
         "a",
         {
           href: resolvedHref,
@@ -10526,13 +10640,13 @@ function renderTextWithLinks(text, ctx) {
   }
   for (const match of text.matchAll(URL_RE)) {
     const overlaps = segments.some(
-      (s) => match.index < s.end && match.index + match[0].length > s.start
+      (s2) => match.index < s2.end && match.index + match[0].length > s2.start
     );
     if (overlaps) continue;
     segments.push({
       start: match.index,
       end: match.index + match[0].length,
-      node: /* @__PURE__ */ jsx(
+      node: /* @__PURE__ */ u2(
         "a",
         {
           href: match[0],
@@ -10545,7 +10659,7 @@ function renderTextWithLinks(text, ctx) {
     });
   }
   if (segments.length === 0) return [text];
-  segments.sort((a, b) => a.start - b.start);
+  segments.sort((a2, b2) => a2.start - b2.start);
   const result = [];
   let cursor = 0;
   for (const seg of segments) {
@@ -10562,42 +10676,42 @@ function renderTextWithLinks(text, ctx) {
 }
 function renderValue(value2, ctx) {
   if (value2 === null || value2 === void 0) {
-    return /* @__PURE__ */ jsx("span", { class: "note-properties-empty", children: "\u2014" });
+    return /* @__PURE__ */ u2("span", { class: "note-properties-empty", children: "\u2014" });
   }
   if (typeof value2 === "boolean") {
-    return /* @__PURE__ */ jsx("span", { class: classNames("note-properties-boolean", value2 ? "is-true" : "is-false"), children: /* @__PURE__ */ jsx("input", { type: "checkbox", checked: value2, disabled: true }) });
+    return /* @__PURE__ */ u2("span", { class: classNames("note-properties-boolean", value2 ? "is-true" : "is-false"), children: /* @__PURE__ */ u2("input", { type: "checkbox", checked: value2, disabled: true }) });
   }
   if (typeof value2 === "number") {
-    return /* @__PURE__ */ jsx("span", { class: "note-properties-number", children: value2 });
+    return /* @__PURE__ */ u2("span", { class: "note-properties-number", children: value2 });
   }
   if (typeof value2 === "string") {
     const parts = renderTextWithLinks(value2, ctx);
-    return /* @__PURE__ */ jsx("span", { class: "note-properties-text", children: parts });
+    return /* @__PURE__ */ u2("span", { class: "note-properties-text", children: parts });
   }
   if (Array.isArray(value2)) {
     const items = value2.map((item, idx) => {
       const rendered = renderValue(item, ctx);
-      return /* @__PURE__ */ jsxs(Fragment, { children: [
-        idx > 0 && /* @__PURE__ */ jsx("span", { class: "note-properties-separator", children: ", " }),
+      return /* @__PURE__ */ u2(S, { children: [
+        idx > 0 && /* @__PURE__ */ u2("span", { class: "note-properties-separator", children: ", " }),
         rendered
       ] });
     });
-    return /* @__PURE__ */ jsx("span", { class: "note-properties-list", children: items });
+    return /* @__PURE__ */ u2("span", { class: "note-properties-list", children: items });
   }
   if (typeof value2 === "object") {
-    return /* @__PURE__ */ jsx("span", { class: "note-properties-object", children: /* @__PURE__ */ jsx("code", { children: JSON.stringify(value2) }) });
+    return /* @__PURE__ */ u2("span", { class: "note-properties-object", children: /* @__PURE__ */ u2("code", { children: JSON.stringify(value2) }) });
   }
   return String(value2);
 }
 function renderTagList(tags, ctx) {
   const items = tags.map((tag, idx) => {
     const href = resolveRelative(ctx.slug, `tags/${tag}`);
-    return /* @__PURE__ */ jsxs(Fragment, { children: [
-      idx > 0 && /* @__PURE__ */ jsx("span", { class: "note-properties-separator", children: ", " }),
-      /* @__PURE__ */ jsx("a", { href, class: "internal tag-link", children: tag })
+    return /* @__PURE__ */ u2(S, { children: [
+      idx > 0 && /* @__PURE__ */ u2("span", { class: "note-properties-separator", children: ", " }),
+      /* @__PURE__ */ u2("a", { href, class: "internal tag-link", children: tag })
     ] });
   });
-  return /* @__PURE__ */ jsx("span", { class: "note-properties-tags", children: items });
+  return /* @__PURE__ */ u2("span", { class: "note-properties-tags", children: items });
 }
 var NoteProperties_default = ((opts) => {
   const { collapsed = false } = opts ?? {};
@@ -10613,20 +10727,20 @@ var NoteProperties_default = ((opts) => {
     const i18nData = i18n(locale);
     const ctx = { slug: props.fileData?.slug ?? "" };
     const isCollapsed = noteProps.collapseProperties ?? collapsed;
-    return /* @__PURE__ */ jsxs(
+    return /* @__PURE__ */ u2(
       "details",
       {
         class: classNames(props.displayClass, "note-properties", "metadata-container"),
         open: !isCollapsed,
         "data-collapsed": isCollapsed,
         children: [
-          /* @__PURE__ */ jsxs("summary", { class: "note-properties-header", children: [
-            /* @__PURE__ */ jsx("span", { class: "note-properties-title", children: i18nData.components.noteProperties.title }),
-            /* @__PURE__ */ jsx("span", { class: "note-properties-count", children: entries.length })
+          /* @__PURE__ */ u2("summary", { class: "note-properties-header", children: [
+            /* @__PURE__ */ u2("span", { class: "note-properties-title", children: i18nData.components.noteProperties.title }),
+            /* @__PURE__ */ u2("span", { class: "note-properties-count", children: entries.length })
           ] }),
-          /* @__PURE__ */ jsx("table", { class: "note-properties-table", children: /* @__PURE__ */ jsx("tbody", { children: entries.map(([key, value2]) => /* @__PURE__ */ jsxs("tr", { class: "note-properties-row metadata-property", children: [
-            /* @__PURE__ */ jsx("td", { class: "note-properties-key metadata-property-key", children: key }),
-            /* @__PURE__ */ jsx("td", { class: "note-properties-value metadata-property-value", children: key === "tags" && Array.isArray(value2) ? renderTagList(value2, ctx) : renderValue(value2, ctx) })
+          /* @__PURE__ */ u2("table", { class: "note-properties-table", children: /* @__PURE__ */ u2("tbody", { children: entries.map(([key, value2]) => /* @__PURE__ */ u2("tr", { class: "note-properties-row metadata-property", children: [
+            /* @__PURE__ */ u2("td", { class: "note-properties-key metadata-property-key", children: key }),
+            /* @__PURE__ */ u2("td", { class: "note-properties-value metadata-property-value", children: key === "tags" && Array.isArray(value2) ? renderTagList(value2, ctx) : renderValue(value2, ctx) })
           ] }, key)) }) })
         ]
       }

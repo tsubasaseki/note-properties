@@ -175,7 +175,7 @@ function renderTextWithLinks(text, ctx) {
     segments.push({
       start: match.index,
       end: match.index + match[0].length,
-      node: /* @__PURE__ */ u2("a", { href, class: "internal note-properties-link", children: display })
+      node: /* @__PURE__ */ u2("a", { href, class: "internal internal-link note-properties-link", children: display })
     });
   }
   for (const match of text.matchAll(MDLINK_RE)) {
@@ -194,7 +194,10 @@ function renderTextWithLinks(text, ctx) {
         "a",
         {
           href: resolvedHref,
-          class: classNames(isExternal ? "external" : "internal", "note-properties-link"),
+          class: classNames(
+            isExternal ? "external external-link" : "internal internal-link",
+            "note-properties-link"
+          ),
           ...isExternal ? { target: "_blank", rel: "noopener noreferrer" } : {},
           children: display || href
         }
@@ -213,7 +216,7 @@ function renderTextWithLinks(text, ctx) {
         "a",
         {
           href: match[0],
-          class: "external note-properties-link",
+          class: "external external-link note-properties-link",
           target: "_blank",
           rel: "noopener noreferrer",
           children: match[0]
@@ -271,7 +274,7 @@ function renderTagList(tags, ctx) {
     const href = resolveRelative(ctx.slug, `tags/${tag}`);
     return /* @__PURE__ */ u2(S, { children: [
       idx > 0 && /* @__PURE__ */ u2("span", { class: "note-properties-separator", children: ", " }),
-      /* @__PURE__ */ u2("a", { href, class: "internal tag-link", children: tag })
+      /* @__PURE__ */ u2("a", { href, class: "internal internal-link tag-link", children: tag })
     ] });
   });
   return /* @__PURE__ */ u2("span", { class: "note-properties-tags", children: items });

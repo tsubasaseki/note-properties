@@ -34,7 +34,7 @@ function renderTextWithLinks(text: string, ctx: RenderCtx): (preact.JSX.Element 
       start: match.index,
       end: match.index + match[0].length,
       node: (
-        <a href={href} class="internal note-properties-link">
+        <a href={href} class="internal internal-link note-properties-link">
           {display}
         </a>
       ),
@@ -56,7 +56,10 @@ function renderTextWithLinks(text: string, ctx: RenderCtx): (preact.JSX.Element 
       node: (
         <a
           href={resolvedHref}
-          class={classNames(isExternal ? "external" : "internal", "note-properties-link")}
+          class={classNames(
+            isExternal ? "external external-link" : "internal internal-link",
+            "note-properties-link",
+          )}
           {...(isExternal ? { target: "_blank", rel: "noopener noreferrer" } : {})}
         >
           {display || href}
@@ -77,7 +80,7 @@ function renderTextWithLinks(text: string, ctx: RenderCtx): (preact.JSX.Element 
       node: (
         <a
           href={match[0]}
-          class="external note-properties-link"
+          class="external external-link note-properties-link"
           target="_blank"
           rel="noopener noreferrer"
         >
@@ -159,7 +162,7 @@ function renderTagList(tags: string[], ctx: RenderCtx): preact.JSX.Element {
     return (
       <>
         {idx > 0 && <span class="note-properties-separator">, </span>}
-        <a href={href} class="internal tag-link">
+        <a href={href} class="internal internal-link tag-link">
           {tag}
         </a>
       </>

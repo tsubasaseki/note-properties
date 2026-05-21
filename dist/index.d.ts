@@ -11,10 +11,9 @@ declare module "vfile" {
         noteProperties: {
             properties: Record<string, unknown>;
             hideView: boolean;
-            /** Per-note override: true = show, false = hide, undefined = follow config */
             showProperties?: boolean;
-            /** Per-note override: true = collapsed, false = expanded, undefined = follow component option */
             collapseProperties?: boolean;
+            resolvedLinks?: Record<string, string>;
         };
     }
 }

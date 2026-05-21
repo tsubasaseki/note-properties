@@ -10354,6 +10354,20 @@ function stripSlashes(s2, onlyStripPrefix) {
 function getFileExtension(s2) {
   return s2.match(/\.[A-Za-z0-9]+$/)?.[0];
 }
+function isFolderPath(fplike) {
+  return fplike.endsWith("/") || endsWith(fplike, "index") || endsWith(fplike, "index.md") || endsWith(fplike, "index.html");
+}
+function pathToRoot(slug2) {
+  let rootPath = slug2.split("/").filter((x2) => x2 !== "").slice(0, -1).map((_2) => "..").join("/");
+  if (rootPath.length === 0) {
+    rootPath = ".";
+  }
+  return rootPath;
+}
+function resolveRelative(current, target) {
+  const res = joinSegments(pathToRoot(current), simplifySlug(target));
+  return res;
+}
 function splitAnchor(link) {
   const [fp, anchor] = link.split("#", 2);
   if (fp.endsWith(".pdf")) {
@@ -10365,6 +10379,52 @@ function splitAnchor(link) {
 function slugTag(tag) {
   return tag.split("/").map((tagSegment) => _sluggify(tagSegment)).join("/");
 }
+function transformInternalLink(link) {
+  const [fplike, anchor] = splitAnchor(decodeURI(link));
+  const segments = fplike.split("/").filter((x2) => x2.length > 0);
+  const prefix = segments.filter(_isRelativeSegment).join("/");
+  const fp = segments.filter((seg) => !_isRelativeSegment(seg) && seg !== "").join("/");
+  const slugged = slugifyFilePath(fp);
+  const simpleSlug = simplifySlug(slugged);
+  const folderPath = isFolderPath(fplike) || isFolderPath(slugged);
+  const joined = joinSegments(stripSlashes(prefix), stripSlashes(simpleSlug));
+  const trail = folderPath ? "/" : "";
+  const res = _addRelativeToStart(joined) + trail + anchor;
+  return res;
+}
+function transformLink(src, target, opts) {
+  const targetSlug = transformInternalLink(target);
+  {
+    const effectiveSrc = !endsWith(src, "index") && opts.allSlugs.includes(`${src}/index`) ? `${src}/index` : src;
+    const folderTail = isFolderPath(targetSlug) ? "/" : "";
+    const canonicalSlug = stripSlashes(targetSlug.slice(".".length));
+    const [targetCanonical, targetAnchor] = splitAnchor(canonicalSlug);
+    {
+      const isMultiSegment = targetCanonical.includes("/");
+      const isFolderTarget = isFolderPath(targetSlug);
+      const matchingFileNames = opts.allSlugs.filter((slug2) => {
+        if (isMultiSegment) {
+          if (slug2 === targetCanonical || slug2.endsWith("/" + targetCanonical)) {
+            return true;
+          }
+          if (isFolderTarget) {
+            const withIndex = targetCanonical + "/index";
+            return slug2 === withIndex || slug2.endsWith("/" + withIndex);
+          }
+          return false;
+        }
+        const parts = slug2.split("/");
+        const fileName = parts.at(-1);
+        return targetCanonical === fileName;
+      });
+      if (matchingFileNames.length === 1) {
+        const matchedSlug = matchingFileNames[0];
+        return resolveRelative(effectiveSrc, matchedSlug) + targetAnchor;
+      }
+    }
+    return joinSegments(pathToRoot(effectiveSrc), canonicalSlug) + folderTail;
+  }
+}
 function slugifyPath(s2) {
   return s2.split("/").map(
     (segment) => segment.replace(/\s/g, "-").replace(/&/g, "-and-").replace(/%/g, "-percent").replace(/\?/g, "").replace(/#/g, "").toLowerCase()
@@ -10373,14 +10433,26 @@ function slugifyPath(s2) {
 function _sluggify(s2) {
   return slugifyPath(s2);
 }
+function _isRelativeSegment(s2) {
+  return /^\.{0,2}$/.test(s2);
+}
+function _addRelativeToStart(s2) {
+  if (s2 === "") {
+    s2 = ".";
+  }
+  if (!s2.startsWith(".")) {
+    s2 = joinSegments(".", s2);
+  }
+  return s2;
+}
 
 // src/util/path.ts
 function simplifySlug2(fp) {
   return simplifySlug(fp);
 }
-function resolveRelative(current, target) {
+function resolveRelative2(current, target) {
   const simplified = simplifySlug2(target);
-  const rootPath = pathToRoot(current);
+  const rootPath = pathToRoot2(current);
   return joinSegments(rootPath, simplified);
 }
 function slugifyWikilinkTarget(target) {
@@ -10390,7 +10462,7 @@ function slugifyWikilinkTarget(target) {
   const slug2 = slugifyFilePath(pathWithExt);
   return slug2 + anchor;
 }
-function pathToRoot(slug2) {
+function pathToRoot2(slug2) {
   let rootPath = slug2.split("/").filter((x2) => x2 !== "").slice(0, -1).map((_2) => "..").join("/");
   if (rootPath.length === 0) {
     rootPath = ".";
@@ -10449,6 +10521,29 @@ function extractLinksFromValue(value2) {
     return Object.values(value2).flatMap((v2) => extractLinksFromValue(v2));
   }
   return [];
+}
+function collectLinkTargetsFromValue(value2) {
+  const targets = /* @__PURE__ */ new Set();
+  if (typeof value2 === "string") {
+    let match;
+    WIKILINK_PATTERN.lastIndex = 0;
+    while ((match = WIKILINK_PATTERN.exec(value2)) !== null) {
+      targets.add(slugifyWikilinkTarget(match[1]));
+    }
+    MDLINK_PATTERN.lastIndex = 0;
+    while ((match = MDLINK_PATTERN.exec(value2)) !== null) {
+      targets.add(match[1]);
+    }
+  } else if (Array.isArray(value2)) {
+    for (const item of value2) {
+      for (const t2 of collectLinkTargetsFromValue(item)) targets.add(t2);
+    }
+  } else if (value2 !== null && typeof value2 === "object") {
+    for (const v2 of Object.values(value2)) {
+      for (const t2 of collectLinkTargetsFromValue(v2)) targets.add(t2);
+    }
+  }
+  return targets;
 }
 var QUARTZ_INTERNAL_KEYS = /* @__PURE__ */ new Set([
   "quartz-properties",
@@ -10567,6 +10662,30 @@ var NoteProperties = (userOpts) => {
           };
         }
       ];
+    },
+    htmlPlugins(ctx) {
+      return [
+        () => {
+          return (_tree, file) => {
+            const noteProps = file.data.noteProperties;
+            if (!noteProps) return;
+            const fileSlug = file.data.slug;
+            const transformOptions = {
+              allSlugs: ctx.allSlugs
+            };
+            const targets = /* @__PURE__ */ new Set();
+            for (const value2 of Object.values(noteProps.properties)) {
+              for (const t2 of collectLinkTargetsFromValue(value2)) targets.add(t2);
+            }
+            if (targets.size === 0) return;
+            const resolved = {};
+            for (const target of targets) {
+              resolved[target] = transformLink(fileSlug, target, transformOptions);
+            }
+            noteProps.resolvedLinks = resolved;
+          };
+        }
+      ];
     }
   };
 };
@@ -10603,12 +10722,15 @@ var noteProperties_inline_default = 'var o="note-properties-collapsed";function 
 var WIKILINK_RE = /\[\[([^\]|]+)(?:\|([^\]]+))?\]\]/g;
 var MDLINK_RE = /\[([^\]]*)\]\(([^)]+)\)/g;
 var URL_RE = /https?:\/\/[^\s<>]+/g;
+function lookupHref(ctx, slugifiedTarget) {
+  return ctx.resolvedLinks[slugifiedTarget] ?? resolveRelative2(ctx.slug, slugifiedTarget);
+}
 function renderTextWithLinks(text, ctx) {
   const segments = [];
   for (const match of text.matchAll(WIKILINK_RE)) {
     const target = match[1];
     const display = match[2] ?? target;
-    const href = resolveRelative(ctx.slug, slugifyWikilinkTarget(target));
+    const href = lookupHref(ctx, slugifyWikilinkTarget(target));
     segments.push({
       start: match.index,
       end: match.index + match[0].length,
@@ -10623,7 +10745,7 @@ function renderTextWithLinks(text, ctx) {
     const display = match[1];
     const href = match[2];
     const isExternal = href.startsWith("http://") || href.startsWith("https://");
-    const resolvedHref = isExternal ? href : resolveRelative(ctx.slug, href);
+    const resolvedHref = isExternal ? href : lookupHref(ctx, href);
     segments.push({
       start: match.index,
       end: match.index + match[0].length,
@@ -10705,7 +10827,7 @@ function renderValue(value2, ctx) {
 }
 function renderTagList(tags, ctx) {
   const items = tags.map((tag, idx) => {
-    const href = resolveRelative(ctx.slug, `tags/${tag}`);
+    const href = resolveRelative2(ctx.slug, `tags/${tag}`);
     return /* @__PURE__ */ u2(S, { children: [
       idx > 0 && /* @__PURE__ */ u2("span", { class: "note-properties-separator", children: ", " }),
       /* @__PURE__ */ u2("a", { href, class: "internal tag-link", children: tag })
@@ -10725,7 +10847,10 @@ var NoteProperties_default = ((opts) => {
     if (entries.length === 0) return null;
     const locale = props.cfg?.locale || "en-US";
     const i18nData = i18n(locale);
-    const ctx = { slug: props.fileData?.slug ?? "" };
+    const ctx = {
+      slug: props.fileData?.slug ?? "",
+      resolvedLinks: noteProps.resolvedLinks ?? {}
+    };
     const isCollapsed = noteProps.collapseProperties ?? collapsed;
     return /* @__PURE__ */ u2(
       "details",

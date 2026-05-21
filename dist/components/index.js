@@ -163,12 +163,15 @@ var noteProperties_inline_default = 'var o="note-properties-collapsed";function 
 var WIKILINK_RE = /\[\[([^\]|]+)(?:\|([^\]]+))?\]\]/g;
 var MDLINK_RE = /\[([^\]]*)\]\(([^)]+)\)/g;
 var URL_RE = /https?:\/\/[^\s<>]+/g;
+function lookupHref(ctx, slugifiedTarget) {
+  return ctx.resolvedLinks[slugifiedTarget] ?? resolveRelative(ctx.slug, slugifiedTarget);
+}
 function renderTextWithLinks(text, ctx) {
   const segments = [];
   for (const match of text.matchAll(WIKILINK_RE)) {
     const target = match[1];
     const display = match[2] ?? target;
-    const href = resolveRelative(ctx.slug, slugifyWikilinkTarget(target));
+    const href = lookupHref(ctx, slugifyWikilinkTarget(target));
     segments.push({
       start: match.index,
       end: match.index + match[0].length,
@@ -183,7 +186,7 @@ function renderTextWithLinks(text, ctx) {
     const display = match[1];
     const href = match[2];
     const isExternal = href.startsWith("http://") || href.startsWith("https://");
-    const resolvedHref = isExternal ? href : resolveRelative(ctx.slug, href);
+    const resolvedHref = isExternal ? href : lookupHref(ctx, href);
     segments.push({
       start: match.index,
       end: match.index + match[0].length,
@@ -285,7 +288,10 @@ var NoteProperties_default = ((opts) => {
     if (entries.length === 0) return null;
     const locale = props.cfg?.locale || "en-US";
     const i18nData = i18n(locale);
-    const ctx = { slug: props.fileData?.slug ?? "" };
+    const ctx = {
+      slug: props.fileData?.slug ?? "",
+      resolvedLinks: noteProps.resolvedLinks ?? {}
+    };
     const isCollapsed = noteProps.collapseProperties ?? collapsed;
     return /* @__PURE__ */ u2(
       "details",

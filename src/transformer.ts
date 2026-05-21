@@ -9,7 +9,8 @@ import type {
   FullSlug,
   FilePath,
 } from "@quartz-community/types";
-import { slugTag, slugifyFilePath, getFileExtension } from "@quartz-community/utils";
+import { slugTag, slugifyFilePath, getFileExtension, transformLink } from "@quartz-community/utils";
+import type { TransformOptions } from "@quartz-community/utils";
 import { slugifyWikilinkTarget } from "./util/path";
 import type { NotePropertiesOptions } from "./types";
 
@@ -80,6 +81,30 @@ function extractLinksFromValue(value: unknown): string[] {
   }
 
   return [];
+}
+
+function collectLinkTargetsFromValue(value: unknown): Set<string> {
+  const targets = new Set<string>();
+  if (typeof value === "string") {
+    let match: RegExpExecArray | null;
+    WIKILINK_PATTERN.lastIndex = 0;
+    while ((match = WIKILINK_PATTERN.exec(value)) !== null) {
+      targets.add(slugifyWikilinkTarget(match[1]!));
+    }
+    MDLINK_PATTERN.lastIndex = 0;
+    while ((match = MDLINK_PATTERN.exec(value)) !== null) {
+      targets.add(match[1]!);
+    }
+  } else if (Array.isArray(value)) {
+    for (const item of value) {
+      for (const t of collectLinkTargetsFromValue(item)) targets.add(t);
+    }
+  } else if (value !== null && typeof value === "object") {
+    for (const v of Object.values(value)) {
+      for (const t of collectLinkTargetsFromValue(v)) targets.add(t);
+    }
+  }
+  return targets;
 }
 
 /** Quartz-internal frontmatter keys that should never appear in the properties table. */
@@ -225,6 +250,37 @@ export const NoteProperties: QuartzTransformerPlugin<Partial<NotePropertiesOptio
         },
       ];
     },
+    htmlPlugins(ctx: BuildCtx) {
+      return [
+        () => {
+          return (_tree: unknown, file: { data: Record<string, unknown> }) => {
+            const noteProps = file.data.noteProperties as
+              | { properties: Record<string, unknown>; resolvedLinks?: Record<string, string> }
+              | undefined;
+            if (!noteProps) return;
+
+            const fileSlug = file.data.slug as FullSlug;
+            const transformOptions: TransformOptions = {
+              strategy: "shortest",
+              allSlugs: ctx.allSlugs,
+            };
+
+            const targets = new Set<string>();
+            for (const value of Object.values(noteProps.properties)) {
+              for (const t of collectLinkTargetsFromValue(value)) targets.add(t);
+            }
+
+            if (targets.size === 0) return;
+
+            const resolved: Record<string, string> = {};
+            for (const target of targets) {
+              resolved[target] = transformLink(fileSlug, target, transformOptions);
+            }
+            noteProps.resolvedLinks = resolved;
+          };
+        },
+      ];
+    },
   };
 };
 
@@ -235,10 +291,9 @@ declare module "vfile" {
     noteProperties: {
       properties: Record<string, unknown>;
       hideView: boolean;
-      /** Per-note override: true = show, false = hide, undefined = follow config */
       showProperties?: boolean;
-      /** Per-note override: true = collapsed, false = expanded, undefined = follow component option */
       collapseProperties?: boolean;
+      resolvedLinks?: Record<string, string>;
     };
   }
 }

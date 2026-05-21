@@ -18,14 +18,18 @@ const WIKILINK_RE = /\[\[([^\]|]+)(?:\|([^\]]+))?\]\]/g;
 const MDLINK_RE = /\[([^\]]*)\]\(([^)]+)\)/g;
 const URL_RE = /https?:\/\/[^\s<>]+/g;
 
-type RenderCtx = { slug: string };
+type RenderCtx = { slug: string; resolvedLinks: Record<string, string> };
+
+function lookupHref(ctx: RenderCtx, slugifiedTarget: string): string {
+  return ctx.resolvedLinks[slugifiedTarget] ?? resolveRelative(ctx.slug, slugifiedTarget);
+}
 
 function renderTextWithLinks(text: string, ctx: RenderCtx): (preact.JSX.Element | string)[] {
   const segments: { start: number; end: number; node: preact.JSX.Element }[] = [];
   for (const match of text.matchAll(WIKILINK_RE)) {
     const target = match[1]!;
     const display = match[2] ?? target;
-    const href = resolveRelative(ctx.slug, slugifyWikilinkTarget(target));
+    const href = lookupHref(ctx, slugifyWikilinkTarget(target));
     segments.push({
       start: match.index,
       end: match.index + match[0].length,
@@ -45,7 +49,7 @@ function renderTextWithLinks(text: string, ctx: RenderCtx): (preact.JSX.Element 
     const display = match[1]!;
     const href = match[2]!;
     const isExternal = href.startsWith("http://") || href.startsWith("https://");
-    const resolvedHref = isExternal ? href : resolveRelative(ctx.slug, href);
+    const resolvedHref = isExternal ? href : lookupHref(ctx, href);
     segments.push({
       start: match.index,
       end: match.index + match[0].length,
@@ -174,6 +178,7 @@ export default ((opts?: NotePropertiesComponentOptions) => {
           hideView: boolean;
           showProperties?: boolean;
           collapseProperties?: boolean;
+          resolvedLinks?: Record<string, string>;
         }
       | undefined;
     if (!noteProps) return null;
@@ -189,7 +194,10 @@ export default ((opts?: NotePropertiesComponentOptions) => {
 
     const locale = props.cfg?.locale || "en-US";
     const i18nData = i18n(locale);
-    const ctx: RenderCtx = { slug: (props.fileData?.slug as string) ?? "" };
+    const ctx: RenderCtx = {
+      slug: (props.fileData?.slug as string) ?? "",
+      resolvedLinks: noteProps.resolvedLinks ?? {},
+    };
 
     // Per-note collapse override takes precedence over component option
     const isCollapsed = noteProps.collapseProperties ?? collapsed;

@@ -3114,7 +3114,7 @@ var require_engines = __commonJS({
           if (wrap !== false) {
             str = "(function() {\nreturn " + str.trim() + ";\n}());";
           }
-          return eval(str) || {};
+          return Function("return " + str)() || {};
         } catch (err) {
           if (wrap !== false && /(unexpected|identifier)/i.test(err.message)) {
             return parse(str, options, false);
